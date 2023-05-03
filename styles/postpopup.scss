@@ -1,0 +1,271 @@
+.main-bg {
+    background: #000000a7;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 20;
+    top: 0;
+
+    .popup-container {
+        width: 80%;
+        aspect-ratio: 1.85/1;
+        background: #00000051;
+        position: fixed;
+        inset: 0;
+        margin: auto;
+        display: flex;
+
+        .post-left {
+            width: 50%;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .post-right {
+            // border: 2px solid blue;
+            width: 50%;
+            background: #000;
+
+            .header {
+                border-bottom: 1.5px solid #80808038;
+                width: 100%;
+                background: #000;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: .8em 1em;
+
+                .header-left {
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        border-radius: 50%;
+                        margin-right: 1em;
+                    }
+
+                    span {
+                        color: #fff;
+                        font-size: 0.9rem;
+                        -webkit-text-stroke: .2px;
+                        letter-spacing: .6px;
+                    }
+
+                    span:last-child {
+                        color: rgb(0, 149, 246);
+                        -webkit-text-stroke: .2px;
+                        font-size: .85rem;
+                        letter-spacing: .5px;
+                    }
+                }
+            }
+
+            .comments {
+                padding-top: 1em;
+                background: #000;
+                height: 330px;
+                width: 100%;
+                padding-left: 1em;
+                overflow-y: scroll;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                img {
+                    border-radius: 50%;
+                }
+
+                .comment-users {
+                    // border: 2px solid green;
+                    display: flex;
+                    gap: 1em;
+
+                    .right-comments {
+                        .mainuser {
+                            position: relative;
+                            padding-right: 2em;
+
+                            .react-box {
+                                margin: 1em 0em;
+                                display: flex !important;
+                                flex-direction: row !important;
+                                gap: .8em;
+
+                                span {
+                                    color: rgb(168, 168, 168);
+                                    font-size: 12px;
+                                    font-weight: 600;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .other-users {
+                    display: flex;
+                    gap: 1em;
+                    margin-top: 1em;
+
+                    .users-comment-right {
+                        position: relative;
+                        padding-right: 2em;
+
+                        span {
+                            font-size: 14px;
+                            font-weight: 400;
+                        }
+
+                        .react-box {
+                            span {
+                                color: rgb(168, 168, 168);
+                                font-size: 12px;
+                                font-weight: 600;
+                            }
+                        }
+
+                        .reply {
+                            span {
+                                color: rgb(168, 168, 168);
+                                font-size: 12px;
+                                font-weight: 600;
+                            }
+
+                            .replies {
+                                margin-top: 1.8em;
+                                display: flex;
+                                flex-direction: column;
+                                gap: 1em;
+                                align-items: center;
+
+                                .reply-user {
+                                    display: flex;
+                                    align-items: center;
+                                    width: 100%;
+                                    position: relative;
+
+                                    div {
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: center;
+                                        gap: .5em;
+                                        padding-left: 1em;
+
+                                        span {
+                                            font-size: .875rem;
+                                            color: #fff;
+                                            padding-top: .4em;
+                                        }
+
+                                        .react-box {
+                                            margin: 0em 0em;
+                                            display: flex !important;
+                                            flex-direction: row !important;
+                                            padding-left: 0;
+
+                                            span {
+                                                padding-top: 0em;
+                                                color: rgb(168, 168, 168);
+                                                font-size: 12px;
+                                                font-weight: 600;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .likes-box {
+                border-top: 1.5px solid #80808038;
+                border-bottom: 1.5px solid #80808038;
+                background: #000;
+                display: flex;
+                flex-direction: column;
+                gap: .8em;
+                padding: .9em 0em;
+
+                .socialicons {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0em .6em;
+
+                    .lefticons {
+                        display: flex;
+                        gap: .8em;
+                        padding-left: .5em;
+
+                        img {
+                            filter: invert(1);
+                            cursor: pointer;
+
+                            &:hover {
+                                filter: invert(1) contrast(.4);
+                            }
+                        }
+                    }
+
+                    img {
+                        cursor: pointer;
+
+                        &:hover {
+                            filter: invert(1) contrast(.4) !important;
+                        }
+                    }
+                }
+
+                .likes {
+                    display: flex;
+                    flex-direction: column;
+                    gap: .3em;
+                    padding-left: 1em;
+
+                    span {
+                        font-size: 1rem;
+                    }
+
+                    span:last-child {
+                        font-size: .6rem;
+                        color: rgb(168, 168, 168);
+                        margin-left: .25em;
+                    }
+                }
+            }
+
+            .post-input {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: .8em 1em;
+
+                .left-comment {
+                    display: flex;
+                    align-items: center;
+                    gap: .9em;
+
+                    input {
+                        background: transparent;
+                        border: none;
+                        outline: none;
+
+                        &::placeholder {
+                            color: rgb(172, 172, 172);
+                            font-weight: 500;
+                            font-size: .9rem;
+                        }
+                    }
+                }
+
+                span {
+                    color: rgb(179, 219, 255);
+                    font-size: .875rem;
+                }
+            }
+        }
+    }
+}
