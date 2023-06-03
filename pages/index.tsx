@@ -5,18 +5,29 @@ import { RightBar } from "@/components/RightBar";
 import { Post } from "@/components/Post";
 import '@/styles/Home.module.css'
 import { useSocial } from "../context/Context"
-import { useEffect } from "react";
 import { useFirebase } from "@/firebase/firebase";
+import { useEffect, useState } from "react";
+
 const Index= ()=>{
-   const popUpBox = useSocial();
-   const { popUp } = popUpBox;
+   const context = useSocial();
+   const { popUp, setCreateBtn } = context;
    const fb = useFirebase();
+   const { getGradientData, gradientBackground, getFontsSizeData, getBackgroundImage, getThemesData, getCommentsData} = fb;
+
+   useEffect(()=>{
+      getGradientData() 
+      getFontsSizeData()
+      getBackgroundImage()
+      getThemesData()
+      getCommentsData()
+      setCreateBtn(true)      
+   },[])
 
    return(
       <>
     {popUp && <Post/>}
     <Header/>
-    <div className="container">
+    <div className="container" >
     <LeftBar/>
     <MainBar/>
     <RightBar/>

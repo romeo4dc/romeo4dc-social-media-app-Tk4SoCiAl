@@ -1,3 +1,10 @@
+$mobo:768px;
+$small:400px;
+@mixin media($breakpoint){
+    @media(width < $breakpoint){
+        @content;
+    }
+}
 .main-bg {
     background: #000000a7;
     width: 100%;
@@ -5,19 +12,32 @@
     position: fixed;
     z-index: 20;
     top: 0;
-
+    z-index: 999;
     .popup-container {
-        width: 80%;
+        width: 80%;        
         aspect-ratio: 1.85/1;
         background: #00000051;
+        top:0;
         position: fixed;
         inset: 0;
         margin: auto;
         display: flex;
 
+        @include media($mobo){
+            min-width: 100%;
+            min-height: 100%;
+            justify-content: center;
+            height: 100%;
+        }
+
         .post-left {
             width: 50%;
+            overflow: hidden;
+            position: relative;
 
+            @include media($mobo){
+                display: none;
+            }
             img {
                 width: 100%;
                 height: 100%;
@@ -28,7 +48,27 @@
             // border: 2px solid blue;
             width: 50%;
             background: #000;
-
+            overflow-y: scroll;            
+            overflow-x: hidden;            
+            @include media($mobo){
+                width: 100%;
+            }       
+            .comment-header{
+                border-bottom: 1px solid rgba(128, 128, 128, 0.313);
+                display: none;
+                align-items: center;
+                padding: .3em;
+                
+                @include media($mobo){
+                    display: flex;
+                }
+            }
+            span{
+                text-align: center;
+                color:#fff;
+                width: 100%;
+                
+            }
             .header {
                 border-bottom: 1.5px solid #80808038;
                 width: 100%;
@@ -36,12 +76,15 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: .8em 1em;
+                padding: 1em;
+
+                @include media($mobo){
+                    padding: .3em;
+                }
 
                 .header-left {
                     display: flex;
                     align-items: center;
-
                     img {
                         border-radius: 50%;
                         margin-right: 1em;
@@ -52,6 +95,8 @@
                         font-size: 0.9rem;
                         -webkit-text-stroke: .2px;
                         letter-spacing: .6px;
+                        text-align: left;
+                        width: fit-content;
                     }
 
                     span:last-child {
@@ -111,8 +156,10 @@
                     margin-top: 1em;
 
                     .users-comment-right {
+                        width: 100%;
                         position: relative;
                         padding-right: 2em;
+                        color: #fff;
 
                         span {
                             font-size: 14px;
@@ -124,6 +171,7 @@
                                 color: rgb(168, 168, 168);
                                 font-size: 12px;
                                 font-weight: 600;
+                                word-spacing: 1px;
                             }
                         }
 
@@ -135,17 +183,20 @@
                             }
 
                             .replies {
-                                margin-top: 1.8em;
+                                margin-top: 1em;
                                 display: flex;
                                 flex-direction: column;
                                 gap: 1em;
                                 align-items: center;
-
+                                width: 103.8%;
+                                position: relative;
                                 .reply-user {
                                     display: flex;
-                                    align-items: center;
+                                    // align-items: center;
                                     width: 100%;
+                                    // height: 40px;
                                     position: relative;
+                                    padding: 0em .5em;
 
                                     div {
                                         display: flex;
@@ -157,7 +208,7 @@
                                         span {
                                             font-size: .875rem;
                                             color: #fff;
-                                            padding-top: .4em;
+                                            font-weight: 500;
                                         }
 
                                         .react-box {
@@ -165,11 +216,12 @@
                                             display: flex !important;
                                             flex-direction: row !important;
                                             padding-left: 0;
+                                            justify-content: start;
 
                                             span {
                                                 padding-top: 0em;
                                                 color: rgb(168, 168, 168);
-                                                font-size: 12px;
+                                                font-size: .875rem!important;
                                                 font-weight: 600;
                                             }
                                         }
@@ -188,7 +240,8 @@
                 display: flex;
                 flex-direction: column;
                 gap: .8em;
-                padding: .9em 0em;
+                padding: .5em 0em;
+                // margin-top: 2.8em;
 
                 .socialicons {
                     display: flex;
@@ -217,6 +270,7 @@
                             filter: invert(1) contrast(.4) !important;
                         }
                     }
+
                 }
 
                 .likes {
@@ -224,9 +278,11 @@
                     flex-direction: column;
                     gap: .3em;
                     padding-left: 1em;
+                    color: #fff;
 
                     span {
                         font-size: 1rem;
+                        text-align: left;
                     }
 
                     span:last-child {
@@ -242,16 +298,22 @@
                 justify-content: space-between;
                 align-items: center;
                 padding: .8em 1em;
+                position: relative;
 
                 .left-comment {
                     display: flex;
                     align-items: center;
                     gap: .9em;
+                    width: 100%;
 
                     input {
                         background: transparent;
-                        border: none;
                         outline: none;
+                        border: none;
+                        color: #fff;
+                        font-size: 1rem;
+                        letter-spacing: .4px;
+                        width: 100%;
 
                         &::placeholder {
                             color: rgb(172, 172, 172);
@@ -263,9 +325,361 @@
 
                 span {
                     color: rgb(179, 219, 255);
-                    font-size: .875rem;
+                    font-size: 1rem;
+                    transition: all .2s ease-in-out;
+                    cursor: pointer;
+                    text-align: right;
+
+                    &:hover {
+                        color: rgb(0, 149, 246);
+                    }
                 }
             }
         }
     }
 }
+.posticons{
+    transition: all .25s ease-in-out;;
+    filter: contrast(0);
+    &:hover{
+        transform: scale(1.1);        
+    }
+}
+.share{
+filter:contrast(0)!important;
+}
+.commentuserimg{
+position: absolute;
+right: 0;
+visibility: hidden;
+}
+
+@include media($mobo){
+    .lbexp{
+     padding: 1.5em 0em!important;
+    //  margin-top: 250px!important;
+    }
+    .sexp{
+        img{
+            transform: scale(1.6);
+        }
+    }
+    .liexp{
+        gap: 2em!important;
+        padding-left: 1em!important;
+        padding-bottom: 1em!important;
+        img{
+            transform: scale(1.6);
+        }
+    }
+    .lexp{
+        padding-left: 1em!important;
+        span{
+            font-size: 1.7rem!important;
+        }
+        span:last-child{
+            font-size: 1rem!important;
+        }
+    }
+    .expsmiley{
+        transform: scale(1.6)!important;
+    }
+    .expinput{
+        height: 4em!important;
+        &::placeholder{
+            font-size: 1.6rem!important;
+        }
+    }
+    .exppost{
+        font-size: 1.7rem!important;
+    }
+    .explc{
+        padding-left: 1.5em!important;
+        gap: 2em!important;
+        input{
+            font-size: 1.5rem!important;
+        }
+    }
+    .expch{
+        padding: 1em 0em!important;
+        img{
+            width:37px;
+            height:37px;
+        }
+        span{
+            font-size: 1.8rem;
+        }
+    }
+    .exph{
+        border-top: 1px solid rgba(128, 128, 128, 0.374);
+    }
+    .exphl{
+        padding: 1em 1.3em;
+        gap: 1em;
+        img{
+            transform: scale(1.6);
+        }
+        span{
+            font-size: 1.5rem!important;
+        }
+    }
+    .expmain{
+        span{
+            font-size: 1.5rem!important;
+        }
+        span:first-child{
+            font-size: 1.75rem!important;
+        }
+        span:last-child{
+            font-size: 1rem!important;
+        }
+    }
+    .expcu{
+        gap: 2.5em!important;
+        img{
+            transform: scale(1.7);
+            margin-top: 1em;
+            margin-left: 1.5em;
+        }
+    }
+    .expou{
+        img{
+            transform: scale(1.7)!important;
+            margin-right: 3em;
+            margin-left:2em;
+        }
+        span{
+            font-size: 1.7rem!important;
+        }
+    }
+    .expc{
+        height: 800px!important;
+    }
+    
+}
+@include media(500px){
+    .lbexp{
+        padding: 3em 2em!important;
+        gap: 1.5em!important;
+        // margin-top: 750px!important;
+       }
+       .sexp{
+           img{
+               transform: scale(2.5);
+           }
+       }
+       .liexp{
+           gap: 3.5em!important;
+           img{
+               transform: scale(2.5);
+           }
+       }
+       .lexp{
+           padding-top: 1em!important;
+           span{
+               font-size: 2.5rem!important;
+           }
+           span:last-child{
+               font-size: 1.5rem!important;
+               padding-top: 1em;
+           }
+       }
+       .expsmiley{
+           transform: scale(2.5)!important;
+       }
+       .expinput{
+           height: 4em!important;
+           &::placeholder{
+               font-size: 2.5rem!important;
+           }
+       }
+       .exppost{
+           font-size: 2.5rem!important;
+       }
+       .explc{
+        //    padding-left:4em!important;
+           gap: 2em!important;
+           input{
+            //    font-size: 3rem!important;
+               padding-left: 1em;
+           }
+       }
+       .expch{
+           padding: 1em 0em!important;
+           img{
+               width:75px;
+               height:75px;
+           }
+           span{
+               font-size:2.5rem;
+           }
+       }
+       .exph{
+        //    border: 1px solid #fff;
+        margin: 1em 0em;
+       }
+       .exphl{
+           padding: 2em 3em;
+        //    gap: 4em;
+           img{
+               transform: scale(2.6);
+           }
+           span{
+               font-size: 2rem!important;
+               margin-left: 1em;
+           }
+       }
+       .expmain{
+           span{
+               font-size: 2.5rem!important;
+               line-height:48px;
+           }
+           span:first-child{
+               font-size: 2.8rem!important;
+               margin-right: .2em;
+           }
+           span:last-child{
+            //    font-size: 3rem!important;
+           }
+       }
+       .expcu{
+           gap: 3em!important;
+           margin-top: 1em;
+           img{
+               transform: scale(2.5);
+               margin-top: 2em;
+               margin-left: 2.5em;
+           }
+       }
+       .expou{
+           img{
+               transform: scale(3)!important;
+               margin-left: 3em;
+               margin-right: 2em;
+           }           
+           span{
+            //    font-size: 3.5rem!important;
+           }
+           margin-bottom: 5em;
+       }
+       .expc{
+        height: 800px!important;
+       }
+
+       .expucr{
+        padding-right: 7em!important;
+       }
+}
+@include media($small){
+    .lbexp{
+        // padding: 6em 0em!important;
+        // margin-top: 750px!important;
+       }
+       .sexp{
+           img{
+               transform: scale(1.6);
+           }
+       }
+       .liexp{
+           gap: 3em!important;
+           padding-left: 2em!important;
+        //    padding-bottom: 1em!important;
+           img{
+               transform: scale(2.5);
+           }
+       }
+       .lexp{
+           padding-left: 1.8em!important;
+           padding-top: 1em!important;
+           span{
+            //    font-size: 4rem!important;
+           }
+           span:last-child{
+            //    font-size: 3rem!important;
+               padding-top: 1em;
+           }
+       }
+       .expsmiley{
+           transform: scale(2.5)!important;
+       }
+       .expinput{
+           height: 4em!important;
+           &::placeholder{
+            //    font-size: 1.6rem!important;
+           }
+       }
+       .exppost{
+        //    font-size: 3rem!important;
+       }
+       .explc{
+        //    padding-left:4em!important;
+           gap: 2em!important;
+           input{
+            //    font-size: 3rem!important;
+               padding-left: 1em;
+           }
+       }
+       .expch{
+           padding: 1em 0em!important;
+           img{
+               width:75px;
+               height:75px;
+           }
+           span{
+            //    font-size: 3.6rem;
+           }
+       }
+       .exph{
+           border: 1px solid #fff;
+       }
+       .exphl{
+           padding: 2em 2em;
+        //    gap: 4em;
+           img{
+               transform: scale(2.6);
+           }
+           span{
+            //    font-size: 3rem!important;
+           }
+       }
+       .expmain{
+           span{
+            //    font-size: 3.5rem!important;
+               line-height:48px;
+           }
+           span:first-child{
+            //    font-size: 3.8rem!important;
+               margin-right: .2em;
+           }
+           span:last-child{
+            //    font-size: 3rem!important;
+           }
+       }
+       .expcu{
+           gap: 2.5em!important;
+           img{
+               transform: scale(1.7);
+               margin-top: 1em;
+               margin-left: 1.5em;
+           }
+       }
+       .expou{
+           img{
+               transform: scale(3)!important;
+               margin-left: 3em;
+               margin-right: 2em;
+           }           
+           span{
+            //    font-size: 3.5rem!important;
+           }
+           margin-bottom: 5em;
+       }
+       .expc{
+        height: 800px!important;
+       }
+       .expucr{
+        padding-right: 7em!important;
+       }
+}
+
+

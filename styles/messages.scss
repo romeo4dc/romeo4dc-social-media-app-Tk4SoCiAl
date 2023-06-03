@@ -1,0 +1,377 @@
+$mobo: 768px;
+
+@mixin media($breakpoint) {
+    @media(width < $breakpoint) {
+        @content;
+    }
+}
+
+.inbox {
+    position: relative;
+    display: flex;
+    min-height: 700px;
+    width: 70%;
+    position: absolute;
+    right: 0;
+
+    @include media($mobo) {
+        width: 100%;
+    }
+
+    .messages-container {
+        border-right: 2px solid rgba(128, 128, 128, 0.266);
+        width: 30%;
+        background: #000;
+        z-index: 999;
+        padding-top: 1.5em;
+        // padding-left: 1.5em;
+        position: fixed;
+        min-height: 700px;
+        left: 0;
+
+        @include media($mobo) {
+            display: none;
+            width: 100%;
+        }
+
+        span {
+            width: 100%;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: .2px;
+            display: flex;
+            align-items: center;
+            gap: .2em;
+
+            @include media($mobo) {
+                font-size: 1.3rem;
+            }
+
+            img {
+                @include media($mobo) {
+                    transform: scale(.95);
+                    padding-bottom: 2px;
+                }
+            }
+        }
+
+        .messages {
+            margin-top: 2em;
+            height: 100%;
+
+            .messages-users {
+                display: flex;
+                align-items: center;
+                gap: 1em;
+                margin-bottom: 1em;
+                cursor: pointer;
+                width: 100%;
+                padding: .6em 1em;
+
+                img {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    pointer-events: none;
+                }
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    gap: .3em;
+                    pointer-events: none;
+
+                    span:first-child {
+                        color: #fff;
+                        font-size: 1.1rem !important;
+                        font-weight: 500 !important;
+                        pointer-events: none;
+
+                        @include media($mobo) {
+                            font-size: .9rem !important;
+                        }
+                    }
+
+                    span:last-child {
+                        color: rgb(168, 168, 168);
+                        font-size: .875rem !important;
+                        font-weight: 400 !important;
+                        pointer-events: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .message-box {
+        // border: 2px solid green;
+        width: 70%;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: #000;
+        position: relative;
+        min-height: 700px;
+        padding: 0em 1em;
+
+        @include media($mobo) {
+            width: 100% !important;
+            padding: 0;
+        }
+
+        .message-box-wrapper {
+            overflow: hidden;
+            width: 100%;
+            height: fit-content;
+
+            .message-box-header {
+                border-bottom: 1px solid #3a39397d;
+                padding: 1em;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                @include media($mobo) {
+                    padding: 0em;
+                }
+
+                .messanger {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 1em;
+
+                    @include media($mobo) {
+                        gap: .3em;
+                    }
+
+                    .message-arrow{
+                        display: none;
+
+                        @include media($mobo){
+                            display: block;
+                        }
+                    }
+
+                    img {
+                        border-radius: 50%;
+
+                        @include media($mobo) {
+                            transform: scale(.5);
+                        }
+                    }
+
+                    img:nth-child(1) {
+                        @include media($mobo){
+                        padding: 0;
+                        margin-right: -1.5em;
+                        transform: scale(.475);
+                    }
+                    }
+
+                    span {
+                        font-size: 1.3rem !important;
+                        font-size: 1.5rem;
+                        color: #fff;
+                    }
+                }
+
+                .icons {
+                    @include media($mobo) {
+                        transform: scale(1);
+                        gap: 1em;
+                        margin-right: 1em;
+                    }
+
+                    img {
+                        @include media($mobo) {
+                            transform: scale(1);
+                        }
+                    }
+
+                    img:nth-child(1) {
+                        @include media($mobo) {
+                            transform: scale(1);
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+
+            .centeruser {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5em;
+                margin-top: 13%;
+
+                img {
+                    border-radius: 50%;
+
+                    @include media($mobo){
+                        transform: scale(.5);
+                    }
+                }
+
+                span {
+                    color: #fff;
+                    font-size: 1.8rem;
+                    line-height: 2px;
+
+                    @include media($mobo){
+                        font-size: 1.6rem;
+                    }
+                }
+                
+
+                button {
+                    color: #000;
+                    background: #fff;
+                    font-size: .95rem;
+                    -webkit-text-stroke: .2px;
+                    padding: .6em 1.1em;
+                    border-radius: .6em;
+
+                    @include media($mobo){
+                        padding: .5em 1em;
+                    }
+                }
+            }
+        }
+
+        .conversation {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-top: 5em;
+
+            .message-sender {
+                width: 100%;
+                display: flex;
+                align-items: start;
+                flex-direction: column;
+                height: fit-content;
+                gap: 1em;
+                margin-bottom: 2em;
+
+                aside {
+                    display: flex;
+                    gap: .7em;
+                    align-items: center;
+                    width: fit-content;
+
+                    @include media($mobo){
+                        gap: 0.5em;
+                    }
+
+                    img {
+                        border-radius: 50%;
+                    }
+
+                    span {
+                        color: #fff;
+                        padding: .8em;
+                        background-color: rgb(38, 38, 38, );
+                        border-radius: 2em;
+                        line-height: 20px;
+
+                        @include media($mobo){
+                            line-height: 5px;
+                        }
+                    }
+
+                    .message-time {
+                        color: rgb(168, 168, 168);
+                        font-size: 0.6rem;
+                    }
+                }
+            }
+
+            .message-receiver {
+                margin-top: 0em;
+                @extend .message-sender;
+                padding-right: 1em;
+                align-items: end;
+
+                
+                aside {
+                    @include media($mobo){
+                        gap: 0em;
+                    }
+                    .message-time {
+                        color: #fff;
+                        font-size: 0.6rem;
+                        margin-right: 1em;
+                    }
+
+                    span {
+                        background-color: rgb(55, 151, 240);
+                    }
+                }
+            }
+        }
+    }
+
+    .message-input {
+        border: 1.5px solid rgba(128, 128, 128, 0.342);
+        border-radius: 2.5em;
+        align-items: center;
+        width: 100%;
+        display: flex;
+        padding: .5em 1em;
+        gap: .5em;
+        
+        @include media($mobo){
+            overflow: hidden;
+            padding: .2em .5em;
+        }
+
+        input {
+            flex-grow: 1;
+            height: fit-content;
+            background: transparent;
+            border: none;
+            color: #fff;
+            outline: none;
+            font-size: 1.1rem;
+            letter-spacing: .4px;
+        }
+
+        .chat-options {
+            display: flex;
+            gap: 1em;
+
+            @include media($mobo){
+                gap: .5em;
+                position: absolute;
+                right: 1em;
+            }
+        }
+        img {
+            cursor: pointer;
+            filter: invert(1) brightness(6);
+            
+            @include media($mobo){
+                transform: scale(.8);
+            }
+        }
+
+        span {
+            color: rgb(55, 151, 240);
+            font-weight: 600;
+            transition: transform .2s;
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+    }
+}
