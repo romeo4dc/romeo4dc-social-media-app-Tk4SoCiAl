@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { useFirebase } from '@/firebase/firebase';
+import { useSocial } from '@/context/Context';
+import { getAuth } from "firebase/auth";
+const auth = getAuth();
+
 const SavedAudio = () => {
     const [isPlay, setIsPlay] = useState(false);
     const [isIndex, setIsIndex] = useState(0);
     const router = useRouter();
     const fb = useFirebase();
     const { GetAllAudiosData, audiosData } = fb;
+    const Context = useSocial();
+    const {isUser, setIsUser} = Context;
+
+    useLayoutEffect(()=>{
+        const unsubscribe = auth.onAuthStateChanged((user)=>{
+            user  ? setIsUser(true) : router.push("Login")
+          })
+          return () => {
+            unsubscribe();
+          };
+    },[])
+
     useEffect(() => {
         GetAllAudiosData();
     }, []);
@@ -21,7 +37,8 @@ const SavedAudio = () => {
      }
     }
     return (
-        <div className="saved-audio-container">
+        <>
+        { isUser && <div className="saved-audio-container">
             <div style={{ cursor: 'pointer' }}>
 
                 <span style={{
@@ -72,7 +89,8 @@ const SavedAudio = () => {
                 }
 
             </div>
-        </div>
+        </div> }
+        </>
     )
 }
 export default SavedAudio;

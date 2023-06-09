@@ -4,22 +4,25 @@ import styled from "styled-components";
 import { useSocial } from "@/context/Context";
 import { useFirebase } from '@/firebase/firebase';
 import { useEffect } from "react";
+
 export const ExplorePopUp = () => {
+
     const [value, setValue] = useState(null);
     const [isPlay, setIsPlay] = useState(true);
     const [isLiked, setIsLiked] = useState(true);
     const [isView, setIsView] = useState(true);
     const [loading, setLoading] = useState(true);
     const Context = useSocial();
-    const { setExplorePopUp, exploreSrc, popUpSrc } = Context;
+    const { setExplorePopUp, exploreSrc, popUpSrc, isFollowed, setIsFollowed } = Context;
     const fb = useFirebase();
-    const { savedItems, removeSavedItems, bookMark, commentsData, getCommentsData, postCommentsBtn, commentPostInput, getCommmentsCollectionSize, postCommentsText, commentSend, postTime, replyComment, isCommentUser, postReplyCommentBtn, getSubCollectionData, replyCommentsData, getCommentPostTiming, getReplyPostTiming, replyPostTime, postUsername, postImage } = fb
+    const { savedItems, removeSavedItems, bookMark, commentsData, getCommentsData, postCommentsBtn, commentPostInput, getCommmentsCollectionSize, postCommentsText, commentSend, postTime, replyComment, isCommentUser, postReplyCommentBtn, getSubCollectionData, replyCommentsData, getCommentPostTiming, getReplyPostTiming, replyPostTime, postUsername, postImage, userDetails, userData } = fb
 
     useEffect(() => {
         getCommentPostTiming()        
         getCommentsData()
         getCommmentsCollectionSize()
         getReplyPostTiming()
+        userData();
     }, [])
     
     let counter = 0;
@@ -70,44 +73,109 @@ export const ExplorePopUp = () => {
                 {
                         popUpSrc ? (
                             <>
-                            <Image alt="randomImage" src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} height={35} width={35} style={{transform:'scale(.5)', filter: 'hue-rotate(45deg) drop-shadow(2px -1px 10px #00000094)'}} className='postloading'/>
+                            <Image 
+                            alt="randomImage" 
+                            src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
+                            height={35} 
+                            width={35} 
+                            style={{
+                                transform:'scale(.5)', 
+                                filter: 'hue-rotate(45deg) drop-shadow(2px -1px 10px #00000094)'}} className='postloading'/>
 
-                            <img src={exploreSrc} className="imagePosts" alt="randomImage" onLoad={postLoader}/>
+                            <img 
+                            src={exploreSrc} 
+                            className="imagePosts" 
+                            alt="randomImage" 
+                            onLoad={postLoader}/>
                             </>
                             ) : (
                             <>
 
-                            <Image alt="randomImage" src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} height={35} width={35} style={{transform:'scale(.5)'}} className='postvideoloading'/>
+                            <Image 
+                            alt="randomImage" 
+                            src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
+                            height={35} 
+                            width={35} 
+                            style={{transform:'scale(.5)'}} 
+                            className='postvideoloading'/>
 
-                            <video width="100%" height="100%" src={exploreSrc} className="videoPosts" autoPlay volume={0.5} onClick={videoPlayer} onLoadedMetadata={postLoader}/>
+                            <video 
+                            width="100%" 
+                            height="100%" 
+                            src={exploreSrc} 
+                            className="videoPosts" 
+                            autoPlay 
+                            volume={0.5} 
+                            onClick={videoPlayer} 
+                            onLoadedMetadata={postLoader}/>
                             
 
-                            <Image alt="randomImage" src={`/assets/play.svg`} height={35} width={35} className={isPlay ? undefined : "explorePlay"} onClick={videoPlayer}/>     
+                            <Image 
+                            alt="randomImage" 
+                            src={`/assets/play.svg`} 
+                            height={35} 
+                            width={35} 
+                            className={isPlay ? undefined : "explorePlay"} 
+                            onClick={videoPlayer}/>     
                             </>
                             )
                     }   
                 </div>
                 <div className="post-right">
                 <div className="comment-header expch">
-                <Image src={`/assets/arrow-left.svg`} height={23} width={23} alt="" style={{ filter: 'invert(1)', margin: '0' }} onClick={() => setExplorePopUp(false)}/>
+                <Image 
+                src={`/assets/arrow-left.svg`} 
+                height={23} 
+                width={23} 
+                alt="asa" 
+                style={{ filter: 'invert(1)', margin: '0' }} 
+                onClick={() => setExplorePopUp(false)}/>
                 <span>Comments</span>
                 </div>
                     <div className="header exph">
                         <div className="header-left exphl">
-                            <Image alt="randomImage" src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} height={35} width={35} className="userloader"/>
-                         <Image alt="randomImage" src={`https://res.cloudinary.com/demo/image/fetch/${postImage}`} height={35} width={35} onLoad={loader} className="commentuserimg"/>                            
+                            <Image 
+                            alt="randomImage" 
+                            src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
+                            height={35} 
+                            width={35} 
+                            className="userloader"/>
+                         <Image 
+                         alt="randomImage" 
+                         src={`https://res.cloudinary.com/demo/image/fetch/${postImage}`} 
+                         height={35} 
+                         width={35} 
+                         onLoad={loader} 
+                         className="commentuserimg"/>                            
                             <span>{postUsername}</span>
-                            <Image src={`/assets/dot.svg`} height={25} width={25} alt="" style={{ filter: 'invert(1)', margin: '0' }} />
-                            <span>Follow</span>
+                            <Image 
+                            src={`/assets/dot.svg`} 
+                            height={25} 
+                            width={25} 
+                            alt="asas" 
+                            style={{ filter: 'invert(1)', margin: '0' }} />
+                            {isFollowed ? 
+                            <span style={{color:'#fff'}} onClick={()=>setIsFollowed(false)}>Unfollow</span> 
+                            : 
+                            <span onClick={()=>setIsFollowed(true)}>Follow</span>}
                         </div>
-                        <Image src={`/assets/more.svg`} height={15} width={15} alt="" style={{ filter: 'invert(1)', margin: '0' }}  />
+                        <Image 
+                        src={`/assets/more.svg`} 
+                        height={15} 
+                        width={15} 
+                        alt="asas" 
+                        style={{ filter: 'invert(1)', margin: '0' }}  />
                     </div>
 
                     {/* Main User*/}
 
                     <div className="comments expc">
                         <div className="comment-users expcu">
-                            <Image alt="randomImage" src={`https://res.cloudinary.com/demo/image/fetch/https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg`} height={35} width={35} />
+                            <Image 
+                            alt="randomImage" 
+                            src={`https://res.cloudinary.com/demo/image/fetch/https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg`} 
+                            height={35} 
+                            width={35} />
                             <div className="right-comments">
                                 <div className="mainuser expmain">
                                     <span style={{
@@ -136,18 +204,26 @@ export const ExplorePopUp = () => {
                         {/* !Other Users */}
 
                         {
-                            commentsData ?
+                            commentsData && userDetails ?
                                 commentsData.map((data, ind) => {
                                     return (
                                         <div className="other-users expou" key={data.id}>
-                                            <Image alt="randomImage" src={`https://res.cloudinary.com/demo/image/fetch/https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg`} height={35} width={35} />
+                                            <img 
+                                            alt="randomImage" 
+                                            src={userDetails.userimg} 
+                                            height={35} 
+                                            width={35} />
 
                                             <div className="users-comment-right expucr">
 
-                                                <User>{data.user}</User>
+                                             <User>{userDetails.username}</User>
 
                                                 <Comment> &nbsp;{data.comments}
-                                                    <Image alt="randomImage" src={`/assets/like.svg`} height={14} width={14} />
+                                                    <Image 
+                                                    alt="randomImage" 
+                                                    src={`/assets/like.svg`} 
+                                                    height={14} 
+                                                    width={14} />
                                                 </Comment>
 
                                                 <Timing>
@@ -156,40 +232,63 @@ export const ExplorePopUp = () => {
                                                 </Timing>
 
                                                 <div className="reply">
-                                                    { isView ? 
+                                                    { value === ind ? isView ? 
                                                     <ViewReply data-name={data.id} onClick={(e)=>{
                                                         setValue(ind)
                                                         getSubCollectionData(e)
-                                                        setIsView(false)
-                                                    }}>____<span >&nbsp;&nbsp;&nbsp;&nbsp;View &nbsp;replies ({replyCommentsData.length})</span>
+                                                         setIsView(false)
+                                                    }}>____<span >&nbsp;&nbsp;&nbsp;&nbsp;View &nbsp;replies {ind === value && `(${replyCommentsData.length})`}</span>
                                                     </ViewReply>
                                                        :
                                                        <HideReply onClick={()=>setIsView(true)}> 
                                                         ____<span>&nbsp;&nbsp;&nbsp;&nbsp;Hide &nbsp;replies</span>
                                                        </HideReply>
+                                                       :
+                                                       <>
+                                                       <ViewReply data-name={data.id} onClick={(e)=>{
+                                                        setValue(ind)
+                                                        getSubCollectionData(e)
+                                                         setIsView(false)
+                                                    }}>____<span >&nbsp;&nbsp;&nbsp;&nbsp;View &nbsp;replies {ind === value && `(${replyCommentsData.length})`}</span>
+                                                    </ViewReply>
+                                                       </>
                                                     }
                                                                 <div className="replies">
                                                     {
-                                                     ind === value &&  replyCommentsData &&
+                                                    !isView && ind === value &&  replyCommentsData && userDetails &&
                                                         replyCommentsData.map((data) => {
                                                             return (
                                                                 <div className="reply-user" key={data.id}>
-                                                                    <Image alt="randomImage" src={`https://res.cloudinary.com/demo/image/fetch/https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg`} height={35} width={35} />
+                                                                <img 
+                                                                alt="randomImage" 
+                                                                src={userDetails.userimg} 
+                                                                style={{height:'35px', width:'35px'}} />
                                                                     <div>
-                                                                        <span>{data.user}</span>
+                                                                        <span style={{marginLeft:'-30px'}}>{userDetails.username}</span>
                                                                         <span>{data.comment}</span>
                                                                         <div className="react-box">
                                                                             <span>{replyPostTime}</span>
                                                                             <span>{data.likes}</span>
                                                                         </div>
                                                                     </div>
-                                                                    { isLiked ? <Image alt="randomImage" src={`/assets/like.svg`} height={14} width={14} style={{
+                                                                    { isLiked ? 
+                                                                    <Image 
+                                                                    alt="randomImage" 
+                                                                    src={`/assets/like.svg`} 
+                                                                    height={14} 
+                                                                    width={14} 
+                                                                    style={{
                                                                         position: 'absolute',
                                                                         right: '0px',
                                                                         filter: 'invert(1)'
                                                                     }} onClick={()=>setIsLiked(false)}/>
                                                                     :
-                                                                    <Image alt="randomImage" src={`/assets/red-heart.svg`} height={14} width={14} style={{
+                                                                    <Image 
+                                                                    alt="randomImage" 
+                                                                    src={`/assets/red-heart.svg`} 
+                                                                    height={14} 
+                                                                    width={14} 
+                                                                    style={{
                                                                         position: 'absolute',
                                                                         right: '0px',
                                                                     }} onClick={()=>setIsLiked(true)}/>}
@@ -205,20 +304,55 @@ export const ExplorePopUp = () => {
                                 })
                                 :
                                 
-                                <Image src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} width={40} height={40} alt="randomImage" style={{ position: 'absolute', right: '23%', top:'38%', filter:'hue-rotate(45deg) drop-shadow(0px -1px 4px rgba(0, 0, 0, 0.523))'}} />
+                                <Image 
+                                src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} 
+                                width={40} 
+                                height={40} 
+                                alt="randomImage" 
+                                style={{ 
+                                    position: 'absolute', 
+                                    right: '23%', 
+                                    top:'38%', 
+                                    filter:'hue-rotate(45deg) drop-shadow(0px -1px 4px rgba(0, 0, 0, 0.523))'}} />
                         }
                     </div>
 
                     <div className="likes-box lbexp">
                         <div className="socialicons sexp">
                             <div className="lefticons liexp">
-                                <Image alt="randomImage" src={`/assets/like.svg`} height={25} width={25} />
-                                <Image alt="randomImage" src={`/assets/comments.svg`} height={25} width={25} />
-                                <Image alt="randomImage" src={`/assets/share.svg`} height={25} width={25} style={{ filter: 'unset' }} />
+                                <Image 
+                                alt="randomImage" 
+                                src={`/assets/like.svg`} 
+                                height={25} 
+                                width={25} />
+                                <Image 
+                                alt="randomImage" 
+                                src={`/assets/comments.svg`} 
+                                height={25} 
+                                width={25} />
+                                <Image 
+                                alt="randomImage" 
+                                src={`/assets/share.svg`} 
+                                height={25} 
+                                width={25} 
+                                style={{ filter: 'unset' }} />
                             </div>
-                            {bookMark ? <Image alt="randomImage" src={`/assets/fillbookmark.svg`} height={27} width={27} style={{ filter: 'invert(1)' }} onClick={removeSavedItems} />
+                            {bookMark ? 
+                            <Image 
+                            alt="randomImage" 
+                            src={`/assets/fillbookmark.svg`} 
+                            height={27} 
+                            width={27} 
+                            style={{ filter: 'invert(1)' }} 
+                            onClick={removeSavedItems} />
                                 :
-                                <Image alt="randomImage" src={`/assets/bookmark.svg`} height={27} width={27} style={{ filter: 'invert(1)' }}  onClick={savedItems} />}
+                                <Image 
+                                alt="randomImage" 
+                                src={`/assets/bookmark.svg`} 
+                                height={27} 
+                                width={27} 
+                                style={{ filter: 'invert(1)' }}  
+                                onClick={savedItems} />}
                         </div>
                         <div className="likes lexp">
                             <span>180,780 likes</span>
@@ -227,15 +361,41 @@ export const ExplorePopUp = () => {
                     </div>
                     <div className="post-input">
                         <div className="left-comment explc">
-                            <Image alt="randomImage" src={`/assets/smiley.svg`} height={28} width={28} style={{ filter: 'invert(1)' }} className="expsmiley"/>
-                            <input type="text" placeholder="Add a comment..." onChange={commentPostInput} value={postCommentsText} className="expinput"/>
+                            <Image 
+                            alt="randomImage" 
+                            src={`/assets/smiley.svg`} 
+                            height={28} 
+                            width={28} 
+                            style={{ filter: 'invert(1)' }} 
+                            className="expsmiley"/>
+                            <input 
+                            type="text" 
+                            placeholder="Add a comment..." 
+                            onChange={commentPostInput} 
+                            value={postCommentsText} 
+                            className="expinput"/>
                         </div>
-                        {commentSend && <Image src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} width={40} height={40} alt="randomImage" style={{ position: 'absolute', left: '50%', filter:'hue-rotate(45deg) drop-shadow(2px -1px 10px #00000094' }} />}
+                        {commentSend && 
+                        <Image 
+                        src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} 
+                        width={40} 
+                        height={40} 
+                        alt="randomImage" 
+                        style={{ 
+                            position: 'absolute', 
+                            left: '50%', 
+                            filter:'hue-rotate(45deg) drop-shadow(2px -1px 10px #00000094' }} />}
                         <span onClick={isCommentUser ? postCommentsBtn : postReplyCommentBtn} className="exppost">Post</span>
                     </div>
                 </div>
             </div>
-            <Image src={`/assets/cross.svg`} height={23} width={23} className="cross" alt="randomImage" onClick={() => setExplorePopUp(false)} />
+            <Image 
+            src={`/assets/cross.svg`} 
+            height={23} 
+            width={23} 
+            className="cross" 
+            alt="randomImage" 
+            onClick={() => setExplorePopUp(false)} />
         </div>
         </>
     )

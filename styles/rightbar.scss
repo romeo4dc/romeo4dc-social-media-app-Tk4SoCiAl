@@ -148,7 +148,7 @@
                 display: flex;
                 gap: .7em;
                 button:first-child {
-                    color: var(--white-color);
+                    color: #fff;
                     background: var(--button-gradient);
                     font-weight: 600;
                     font-size: .9rem;
@@ -163,7 +163,7 @@
                     }
                 }
                 button:last-child {
-                    color: var(--black-color);
+                    color: #fff;
                     background: rgba(211, 211, 211, 0.622);
                     font-weight: 600;
                     font-size: .9rem;

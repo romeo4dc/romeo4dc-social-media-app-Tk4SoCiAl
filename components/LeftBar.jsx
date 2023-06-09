@@ -7,6 +7,9 @@ import { Themes } from "@/components/Themes";
 import { Notifications } from "@/components/Notifications";
 import { Router, useRouter } from 'next/router';
 import { useFirebase } from '@/firebase/firebase';
+import { getAuth } from 'firebase/auth';
+
+const auth = getAuth();
 
 export const LeftBar = () => {
   const [data, setData] = useState(category)
@@ -41,7 +44,7 @@ export const LeftBar = () => {
     setThemePopUp(true);
   }
   else if(e.target.textContent === 'Messages'){
-    router.push("Messages");
+    router.push("/MessagesComp/Messages");
   }
   else if(e.target.textContent === 'Settings'){
     router.push("UserProfile");
@@ -58,23 +61,56 @@ export const LeftBar = () => {
     <Notifications notificationBtn={notificationBtn}/>
     <div className="leftbarcontainer" onClick={notificationBar}>
       <div className="leftbaruser">
-        <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" 
-        width={35} 
-        height={35}        
+      { auth.currentUser ? 
+      userDetails && 
+        ( 
+        <img src={userDetails.userimg} alt="randomImage" 
+        width={43} 
+        height={43}   
+        style={{cursor:'pointer'}}
+        onClick={()=>router.push("/")}                     
+        /> 
+        ) : (
+          <Image src={`https://res.cloudinary.com/demo/image/fetch/https://cdn-icons-png.flaticon.com/512/149/149071.png`}
+        alt="randomImage" 
+        width={43} 
+        height={43}       
+        style={{cursor:'pointer'}}
+        onClick={()=>router.push("/")}                 
         />
-        <Image src={`assets/tk4.svg`} alt="randomImage" 
+        )
+        }
+
+        <Image src={`/assets/tk4.svg`} alt="randomImage" 
         width={35} 
         height={35}
-        onClick={()=>router.push("/")}        
+        style={{cursor:'pointer'}}
+        onClick={()=>router.push("/")}                
         />
-        <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" 
+
+       { auth.currentUser ? 
+        userDetails &&  ( 
+        <img src={userDetails.userimg} alt="randomImage" 
         width={43} 
         height={43}        
+        onClick={()=>router.push("/")}
+        /> 
+        ) : (
+          <Image src={`https://res.cloudinary.com/demo/image/fetch/https://cdn-icons-png.flaticon.com/512/149/149071.png`} 
+        alt="randomImage" 
+        width={43} 
+        height={43}        
+        style={{cursor:'pointer'}}
+        onClick={()=>router.push("/")}
         />
+        )
+        }
+
         <div>
           { userDetails &&
           <>
-          <span>Tushar Kumar</span>
+          {auth.currentUser ? 
+          <span>{auth.currentUser.displayName}</span> : <span>User</span>}
           <span>{`@${userDetails.username}`}</span>
           </>
           }
@@ -85,8 +121,14 @@ export const LeftBar = () => {
           data.map((val, ind) => {
             return (
               
-              <li key={ind} onClick={()=> setValue(ind)} className={value === ind ? "active": undefined}>
-              <Image src={`${val.img}`} alt="randomImage" width={22} height={22} />
+              <li 
+              key={ind} 
+              onClick={()=> setValue(ind)} 
+              className={value === ind ? "active": undefined}>
+              <Image src={`${val.img}`}
+              alt="randomImage"
+              width={22} 
+              height={22} />
               <span>{val.name}</span>
               </li>
             )

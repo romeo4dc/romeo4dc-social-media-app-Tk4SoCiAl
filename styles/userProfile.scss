@@ -1,10 +1,12 @@
-$mobo:768px;
-$tablet:1250px;
+$mobo: 768px;
+$tablet: 1250px;
+
 @mixin media($breakpoint) {
     @media(width < $breakpoint) {
         @content;
     }
 }
+
 .user-profile-container {
     width: 100%;
     height: 100% !important;
@@ -15,11 +17,11 @@ $tablet:1250px;
     margin-left: .2em;
     border: 2px solid grey;
 
-    @include media($tablet){
+    @include media($tablet) {
         padding-left: 4.8em;
     }
 
-    @include media($mobo){
+    @include media($mobo) {
         padding-left: 0em;
     }
 
@@ -42,25 +44,30 @@ $tablet:1250px;
         border-bottom: none;
         z-index: 99;
 
-        @include media($mobo){
+        @include media($mobo) {
             border: none;
         }
 
         .user-details {
             padding-left: 6.8em;
-            width: 100%;
+            width: 98%;
             display: flex;
             height: 100%;
             gap: 8%;
+            padding-top: 0.5em;
             margin-top: 2em;
- 
-            @include media($tablet){
-               padding-left: 3em;   
+            margin-bottom: 1em;
+            margin-inline: 0.5em;
+            border: 2px solid var(--black-color);
+            border-radius: 5px;
+
+            @include media($tablet) {
+                padding-left: 3em;
             }
 
-            @include media($mobo){
-               padding-left: .5em;   
-               gap: 0%;
+            @include media($mobo) {
+                padding-inline: 1em;
+                gap: 0%;
             }
 
             .user-bio {
@@ -69,7 +76,7 @@ $tablet:1250px;
                 align-items: center;
                 justify-content: start;
 
-                @include media($mobo){
+                @include media($mobo) {
                     align-items: center;
                     text-align: center;
                 }
@@ -80,21 +87,19 @@ $tablet:1250px;
                     -webkit-text-stroke: .3px;
                     letter-spacing: .3px;
                     margin-top: .8em;
-
-                    
                 }
-                
+
                 span:nth-child(3) {
                     font-size: 1.2rem;
                     font-weight: 600;
                     letter-spacing: .2px;
                     margin-top: 0.3em;
-                    color: var(--white-color);
-                    
-                    @include media($mobo){
+                    color: #808080;
+
+                    @include media($mobo) {
                         margin-top: -1em;
                     }
-                    
+
                 }
 
                 .user-img {
@@ -107,7 +112,7 @@ $tablet:1250px;
                     align-items: center;
                     position: relative;
 
-                    @include media($mobo){
+                    @include media($mobo) {
                         transform: scale(.6);
                         // margin-left: -30px;
                     }
@@ -142,9 +147,11 @@ $tablet:1250px;
                     height: fit-content;
                     max-width: 250px;
                     margin: .875em 0em;
+                    text-align: center;
 
                     span {
                         color: var(--white-color);
+                        font-weight: 600;
                     }
                 }
             }
@@ -155,7 +162,7 @@ $tablet:1250px;
                 gap: 1.3em;
                 // border: 2px solid blue;
 
-                @include media($mobo){
+                @include media($mobo) {
                     margin-top: 1.5em;
                 }
 
@@ -170,7 +177,7 @@ $tablet:1250px;
                         font-weight: 600;
                         letter-spacing: .1px;
 
-                        @include media(400px){
+                        @include media(400px) {
                             font-size: 1rem;
                         }
                     }
@@ -188,11 +195,11 @@ $tablet:1250px;
                         transition: all .6s cubic-bezier(0.075, 0.82, 0.165, 1);
                         cursor: pointer;
 
-                        @include media($mobo){
+                        @include media($mobo) {
                             padding: .3em .8em;
                         }
 
-                        @include media(400px){
+                        @include media(400px) {
                             font-size: 0.8rem;
                         }
 
@@ -208,7 +215,7 @@ $tablet:1250px;
                     display: flex;
                     gap: 2em;
 
-                    @include media($mobo){
+                    @include media($mobo) {
                         gap: 1em;
                     }
 
@@ -219,7 +226,7 @@ $tablet:1250px;
                         letter-spacing: .2px;
                         font-weight: 500;
 
-                        @include media($mobo){
+                        @include media($mobo) {
                             font-size: .875rem;
                         }
                     }
@@ -235,21 +242,35 @@ $tablet:1250px;
 
     .user-data {
         // border-top: 6px solid grey;
-        border-left:  3px solid grey;
+        border-left: 3px solid grey;
         z-index: 99;
-        padding: 0 2.5%;
+        width: 100%;
+
+        @include media($mobo) {
+            padding: 0;
+            border: none;
+        }
 
         .user-header {
-            width: 950px;
+            max-width: 950px;
             display: flex;
             justify-content: center;
             margin: auto;
+            border: 2px solid var(--black-color);            
+            margin-bottom: 1em;
+            border-radius: 5px;
             // border-top: 6px solid grey;
 
             div {
                 display: flex;
                 justify-content: center;
                 gap: 25%;
+                width: 100%;
+
+                // border: 2px solid red;              
+                @include media($mobo) {
+                    gap: 20%;
+                }
 
                 li {
                     list-style: none;
@@ -275,24 +296,27 @@ $tablet:1250px;
         }
 
         .user-content {
-            width: 950px;
+            width: 100%;
             height: 800px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             background: #000;
             box-sizing: border-box;
-            margin-inline: auto;
 
             .user-posts {
                 border: 2px solid var(--black-color);
                 border-left: none;
                 border-bottom: none;
-                flex-grow: 1;   
+                flex-grow: 1;
                 color: var(--black-color);
-                width: 32.8%;
+                width: 250px;
                 height: 40%;
                 object-fit: cover;
+
+                @include media($mobo) {
+                    border-left: 2px solid #000;
+                }
 
                 img {
                     height: 100%;
@@ -302,7 +326,8 @@ $tablet:1250px;
             }
 
             .video-posts {
-                border: 2px solid var(--black-color);;
+                border: 2px solid var(--black-color);
+                ;
                 height: 40%;
                 width: 32.8%;
                 flex-grow: 1;
@@ -328,7 +353,7 @@ $tablet:1250px;
     justify-content: center;
     gap: 2%;
 
-    @include media($mobo){
+    @include media($mobo) {
         flex-direction: column;
         align-items: center;
     }
@@ -416,14 +441,21 @@ $tablet:1250px;
 
 .user-tagged-container {
     width: 100%;
+    height: 800px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-
+    background: #000;
+    box-sizing: border-box;
     img {
-        max-width: 310px;
-        height: 310px;
-        border: 5px solid #000;
+        border: 2px solid var(--black-color);
         border-left: none;
+        border-bottom: none;
+        flex-grow: 1;
+        color: var(--black-color);
+        width: 250px;
+        height: 40%;
+        object-fit: cover;
     }
 }
 
@@ -468,7 +500,7 @@ $tablet:1250px;
     }
 }
 
-.saved-explore-container{
+.saved-explore-container {
     border: 2px solid #000;
     width: 1260px;
     height: 900px;
@@ -477,4 +509,24 @@ $tablet:1250px;
     justify-content: center;
     padding-left: 0;
     margin-inline: auto;
+}
+.saved-header{
+    margin-left: 1em;
+    cursor: pointer;
+    margin-bottom: 1em;
+         
+    span{
+        @include media($mobo){
+            font-size: 2rem!important;
+        }
+        img{
+            margin-right: 5px;
+        }
+        span{
+            @include media($mobo){
+                font-size: 2rem!important;
+                margin-left: -5px;
+            }   
+        }
+    }
 }

@@ -14,8 +14,7 @@ $mobo: 768px;
     width: 15em;
     position: fixed;
     left: 1em;
-    top: 7em;
-
+    top: 5.5em;
 
     @include media($mobo) {
         flex-direction: row;
@@ -51,9 +50,12 @@ $mobo: 768px;
         @include media($mobo) {
             display: none;
         }
-
+        img{
+            cursor: pointer;
+        }
         img:first-child {
             border-radius: 50%;
+            padding:2px;            
             background: var(--button-gradient);
 
             @include media($tablet) {
@@ -66,7 +68,6 @@ $mobo: 768px;
         img:nth-child(2) {
             border-radius: 50%;
             border: 2px solid #808080;
-            // background: var(--button-gradient);             
             display: none !important;
 
             @include media($tablet) {

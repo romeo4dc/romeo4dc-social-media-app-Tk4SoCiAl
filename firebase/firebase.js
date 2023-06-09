@@ -2,10 +2,11 @@ import { initializeApp } from "firebase/app";
 import { getStorage, getDownloadURL, ref, uploadBytes, } from 'firebase/storage'
 import { createContext, useContext, useEffect, useState } from "react";
 import { FieldValue, addDoc, collection, deleteField, doc, getDoc, getDocs, getFirestore, limit, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where } from "firebase/firestore";
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { getAuth, GithubAuthProvider, GoogleAuthProvider, linkWithCredential, onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import { useSocial } from "@/context/Context";
 import { addSyntheticLeadingComment } from "typescript";
 import { useRef } from "react";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC8pN9thmcqa9EbLLFaC_iW5FEByLV35bc",
@@ -22,6 +23,7 @@ const storage = getStorage(app);
 export const auth = getAuth();
 const firestore = getFirestore();
 const db = getFirestore()
+export const database = getDatabase();
 const FirebaseContext = createContext(null);
 export const useFirebase = () => useContext(FirebaseContext)
 export const FirebaseProvider = ({ children }) => {
@@ -31,6 +33,7 @@ export const FirebaseProvider = ({ children }) => {
     const [uploading, setUploading] = useState(false);
     const [videoData, setVideoData] = useState();
     const [postsData, setPostsData] = useState();
+    const [postsId, setPostsId] = useState(null);
     const [mixData, setMixData] = useState();
     const [docSize, setDocSize] = useState();
     const [exploreData, setExploreData] = useState();
@@ -61,6 +64,12 @@ export const FirebaseProvider = ({ children }) => {
     const [selectedPost, setSelectedPost] = useState("");
     const [isPostSelector, setIsPostSelector] = useState(false);
     const [isPostVideo, setIsPostVideo] = useState(false);
+    const [messages, setMessages] = useState();
+    const [msgDocSize, setMsgDocSize] = useState(null);
+    const [lastMessage, setLastMessage] = useState("");
+    const [postUsername, setPostUserName] = useState(null);
+    const [postImage, setPostImage] = useState(null);
+    const [msg, setMsg] = useState('');
 
     const currentDate = new Date();
     const milliSeconds = currentDate.getTime();
@@ -146,6 +155,7 @@ export const FirebaseProvider = ({ children }) => {
             const pData = [];
             snapshot.forEach((data) => {
                 pData.push(data.data())
+                setPostsId(data.id)
             })
             setPostsData(pData)
         })
@@ -249,12 +259,51 @@ export const FirebaseProvider = ({ children }) => {
         setBookMark(true)
     }
 
+    const postSavedItems = async () =>{
+        let post = document.querySelector('.postimg')
+        const q = query(collection(db, "posts"), where("file", "==", post.src))
+        const snap = await getDocs(q)
+        const docId = snap.docs[0].id;
+        const docRef = doc(db, 'posts', docId);
+        await updateDoc(docRef, { preference: "saved" })
+        setBookMark(true)
+    }
+
     const removeSavedItems = async () => {
         let post = document.querySelector('.imagePosts')
         const q = query(collection(db, "posts"), where("file", "==", post.src))
         const snap = await getDocs(q);
         const docId = snap.docs[0].id;
         const docRef = doc(db, 'posts', docId);
+        await updateDoc(docRef, { preference: deleteField() })
+        setBookMark(false)
+    }
+
+    const removePostSavedItems=async()=>{
+        let post = document.querySelector('.postimg')
+        const q = query(collection(db, "posts"), where("file", "==", post.src))
+        const snap = await getDocs(q);
+        const docId = snap.docs[0].id;
+        const docRef = doc(db, 'posts', docId);
+        await updateDoc(docRef, { preference: deleteField() })
+        setBookMark(false)
+    }
+
+    const postReelsItems = async () =>{
+        let post = document.querySelector('.reelsvideo')
+        const q = query(collection(db, "videos"), where("file", "==", post.src))
+        const snap = await getDocs(q)
+        const docId = snap.docs[0].id;
+        const docRef = doc(db, 'videos', docId);
+        await updateDoc(docRef, { preference: "savedReel" })
+        setBookMark(true)
+    }
+    const removeReelSavedItems=async()=>{
+        let post = document.querySelector('..reelsvideo')
+        const q = query(collection(db, "videos"), where("file", "==", post.src))
+        const snap = await getDocs(q);
+        const docId = snap.docs[0].id;
+        const docRef = doc(db, 'videos', docId);
         await updateDoc(docRef, { preference: deleteField() })
         setBookMark(false)
     }
@@ -295,7 +344,7 @@ export const FirebaseProvider = ({ children }) => {
         //  !Get Document
         try {
             const downloadURL = await getDownloadURL(storageRef)
-            console.log(downloadURL)
+            
             //!Update document in the specified collection
             const docRef = doc(firestore, 'userdata', 'user-background')
             await updateDoc(docRef, {
@@ -466,7 +515,7 @@ export const FirebaseProvider = ({ children }) => {
     }
 
     const postCommentsBtn = async () => {
-        console.log(commentsCollectionName)
+        
         setCommentSend(true)
         try {
             setCommentsDocSize(commentsDocSize + 1)
@@ -488,15 +537,17 @@ export const FirebaseProvider = ({ children }) => {
 
     }
 
-    const [postUsername, setPostUserName] = useState(null);
-    const [postImage, setPostImage] = useState(null);
+    const [tinyVideoImg, setTinyVideoImg] = useState(null);
     const createPostsCollection = async (e) => {
         let name = e.target.getAttribute('data-name');
         setCommentsCollectionName(`users${name}`)
         let username = e.target.getAttribute('username')
         setPostUserName(username)
-        let userImg = e.target.getAttribute('image')
+        let userImg = e.target.getAttribute('image')        
         setPostImage(userImg)
+        let tinyVideoImg = e.target.getAttribute('vidTiny');
+        // console.log(tinyVideoImg)
+        setTinyVideoImg(tinyVideoImg)
         try {
             collection(db, `users${name}`)
         } catch (err) {
@@ -528,13 +579,13 @@ export const FirebaseProvider = ({ children }) => {
 
 
     const replyComment = async (e) => {
-        console.log("replyComment")
+        
         setIsCommentUser(false)
 
         let attr = parseInt(e.target.getAttribute("data-name"));
-        console.log(commentsCollectionName)
+        
 
-        setPostCommentText("@User");
+        setPostCommentText("How are you doing!");
         try {
             const querySnapShot = await getDocs(query(collection(db, commentsCollectionName), where("id", "==", attr)))
 
@@ -548,7 +599,7 @@ export const FirebaseProvider = ({ children }) => {
 
     const getSubCollectionData = async (e) => {
         let attr = parseInt(e.target.getAttribute("data-name"))
-        console.log(attr)
+        
         try {
             const querySnapShot = await getDocs(query(collection(db, commentsCollectionName), where("id", "==", attr)))
 
@@ -614,20 +665,34 @@ export const FirebaseProvider = ({ children }) => {
         } else {
             setReplyPostTime('now')
         }
-        console.log(replyPostTime, "re")
+        
     }
 
     //    !Login Items   
+
+    // ?SIGNUP WITH GOOGLE
+
     const signInWithGoogle = async () => {
         const provider = new GoogleAuthProvider();
-
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
-            console.log(user.uid)
         } catch (error) {
             console.log(error);
         }
+    }
+
+    // ?SIGNUP WITH GITHUB
+
+    const signInWithGithub = async () => {
+        const provider = new GithubAuthProvider();
+        try{
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+            
+          } catch (err) {
+            console.error('GitHub login error:', err);
+          }        
     }
 
     const getCurrentUser = () => {
@@ -635,7 +700,6 @@ export const FirebaseProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if(user){
             setUserUid(user.uid)
-            console.log(user)
         }
         })
         return () => {
@@ -648,9 +712,6 @@ export const FirebaseProvider = ({ children }) => {
         setIsMessageUser(true)
     }
 
-    const [messages, setMessages] = useState();
-    const [msgDocSize, setMsgDocSize] = useState(null);
-    const [lastMessage, setLastMessage] = useState("");
     const getChatsData = async () => {
         const messagesRef = collection(db, 'messages');
         const messageQuery = query(messagesRef, orderBy('createdAt'), limit(50));
@@ -667,11 +728,10 @@ export const FirebaseProvider = ({ children }) => {
      }
     }
 
-    const [msg, setMsg] = useState('');
     const sendMessage=async(e)=>{
         e.preventDefault();
         const { uid , photoURL } = auth.currentUser;
-        console.log(uid)
+        
         const messagesRef = collection(db, 'messages');
         await addDoc(messagesRef, {
           text:msg,
@@ -684,7 +744,7 @@ export const FirebaseProvider = ({ children }) => {
        }
 
     return (
-        <FirebaseContext.Provider value={{ HandleFileChange, firestore, files, storage, postContent, db, HandleVideoChange, videoFiles, setUploading, uploading, videoData, GetVideosData, GetPostsData, postsData, GetExploreData, docSize, exploreData, shuffleArrayOfObjects, GetMixData, mixData, StoriesData, myStoriesData, savedItems, removeSavedItems, bookMark, GetAllAudiosData, audiosData, userData, updateUserDetails, uploadToFirestore, textArea, setNickName, nickNameValue, textAreaValue, nickNameCounter, textAreaCounter, setColorSizes, setFontSizes, getGradientData, gradientBackground, getFontsSizeData, uplaodBgToFirestore, getBackgroundImage, userDetails, lightTheme, darkTheme, getThemesData, getCommentsData, commentsData, commentPostInput, postCommentsBtn, getCommmentsCollectionSize, postCommentsText, createPostsCollection, commentSend, getCommentPostTiming, postTime, replyComment, isCommentUser, postReplyCommentBtn, getSubCollectionData, replyCommentsData, getReplyPostTiming, replyPostTime, signInWithGoogle, getCurrentUser, MessageUser, isMessageUser, senderMessageValue, setSenderMessageValue, getChatsData, messages, sendMessage, setMsg, msg, selectedPost, setIsPostSelector, isPostSelector, isPostVideo, lastMessage, postUsername, postImage
+        <FirebaseContext.Provider value={{ HandleFileChange, firestore, files, storage, postContent, postsId, db, HandleVideoChange, videoFiles, setUploading, uploading, videoData, GetVideosData, GetPostsData, postsData, GetExploreData, docSize, exploreData, shuffleArrayOfObjects, GetMixData, mixData, StoriesData, myStoriesData, savedItems, removeSavedItems, bookMark, GetAllAudiosData, audiosData, userData, updateUserDetails, uploadToFirestore, textArea, setNickName, nickNameValue, textAreaValue, nickNameCounter, textAreaCounter, setColorSizes, setFontSizes, getGradientData, gradientBackground, getFontsSizeData, uplaodBgToFirestore, getBackgroundImage, userDetails, lightTheme, darkTheme, getThemesData, getCommentsData, commentsData, commentPostInput, postCommentsBtn, getCommmentsCollectionSize, postCommentsText, createPostsCollection, commentSend, getCommentPostTiming, postTime, replyComment, isCommentUser, postReplyCommentBtn, getSubCollectionData, replyCommentsData, getReplyPostTiming, replyPostTime, signInWithGoogle, getCurrentUser, MessageUser, isMessageUser, senderMessageValue, setSenderMessageValue, getChatsData, messages, sendMessage, setMsg, msg, selectedPost, setIsPostSelector, isPostSelector, isPostVideo, lastMessage, postUsername, postImage, signInWithGithub, postSavedItems, removePostSavedItems, removeReelSavedItems, postReelsItems, tinyVideoImg
          }}>
             {children}
         </FirebaseContext.Provider>

@@ -11,15 +11,15 @@ const Reels = () => {
   const fb = useFirebase();
   const { getGradientData, gradientBackground, getFontsSizeData, getBackgroundImage, getThemesData, getCommentsData , GetVideosData} = fb;
   const popUpBox = useSocial();
-  const { setBtn } = popUpBox;
+  const { setBtn, setCreateBtn } = popUpBox;
   useEffect(()=>{
+    setCreateBtn(false)
     GetVideosData()
     getGradientData() 
     getFontsSizeData()
     getBackgroundImage()
     getThemesData()
-    getCommentsData()
-
+    getCommentsData()    
     window.onscroll=()=>{
       if(window.pageYOffset >= 70){
           document.querySelector(".navbar").style.position="fixed";

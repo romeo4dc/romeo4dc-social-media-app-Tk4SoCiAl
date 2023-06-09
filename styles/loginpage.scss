@@ -1,0 +1,476 @@
+$mobo: 768px;
+
+@mixin media($breakpoint) {
+    @media(width < $breakpoint) {
+        @content;
+    }
+}
+
+
+.my-btn {
+    width: 150px;
+    height: 49px;
+    border: none;
+    outline: none;
+    border-radius: 49px;
+    cursor: pointer;
+    background-color: #5995fd;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 10px 0;
+    transition: .5s;
+
+    &:hover {
+        background-color: #4d84e2;
+    }
+}
+
+.loginpage-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #fff;
+    overflow: hidden;
+
+    @include media($mobo) {
+        min-height: 800px;
+        height: 100vh;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 2000px;
+        height: 2000px;
+        border-radius: 50%;
+        background: linear-gradient(-45deg, #4481eb, #04befe);
+        top: -10%;
+        right: 48%;
+        transform: translateY(-50%);
+        z-index: 6;
+        transition: 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        @include media($mobo) {
+            width: 1500px;
+            height: 1500px;
+            left: 30%;
+            bottom: 68%;
+            transform: translateX(-50%);
+            right: initial;
+            top: initial;
+            transition: 2s ease-in-out;
+        }
+
+        @include media(570px) {
+            bottom: 72%;
+            left: 50%;
+        }
+    }
+
+    .forms-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        // background-color: green;
+
+        .signin-signup {
+            position: absolute;
+            top: 50%;
+            left: 75%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+            display: grid;
+            grid-template-columns: 1fr;
+            z-index: 5;
+            transition: 1s 0.7s ease-in-out;
+
+            @include media($mobo) {
+                width: 100%;
+                left: 50%;
+                top: 95%;
+                transform: translate(-50%, -100%);
+                transition: 1s 0.8s ease-in-out;
+            }
+
+            form {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                padding: 0 5rem;
+                overflow: hidden;
+                grid-column: 1/2;
+                grid-row: 1/2;
+                transition: 0.2s 0.7s ease-in-out;
+
+                @include media($mobo){
+                    margin: -1em 0;
+                }
+
+                @include media(570px) {
+                    padding: 0 1.5rem;
+                }
+
+                .title {
+                    font-size: 2.2rem;
+                    color: #4444;
+                    margin-bottom: 10px;
+                }
+
+                .input-field {
+                    position: relative;
+                    max-width: 300px;
+                    width: 100%;
+                    height: 55px;
+                    background-color: #f0f0f0;
+                    margin: 10px 0;
+                    border-radius: 55px;
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 1em;
+                    padding: 0 1rem;
+
+                    img {
+                        text-align: center;
+                        line-height: 55px;
+                        color: #acacac;
+                        font-size: 1.1rem;
+                        margin: auto;
+                    }
+
+                    input {
+                        background: none;
+                        outline: none;
+                        border: none;
+                        line-height: 1;
+                        font-weight: 600;
+                        font-size: 1.1rem;
+                        color: #333;
+
+                        &::placeholder {
+                            color: #aaa;
+                            font-weight: 500;
+                        }
+                    }
+
+                    p {
+                        color: red;
+                        position: absolute;
+                        bottom: -18px;
+                        font-size: .875rem;
+                    }
+
+                    .password-error {
+                        font-size: .8rem;
+                    }
+
+                }
+
+                .btn {
+                    @extend .my-btn;
+                }
+
+                .social-text {
+                    padding: .7em 0;
+                    font-size: 1rem;
+                }
+
+                .social-media {
+                    display: flex;
+                    justify-content: center;
+
+                    .social-icons {
+                        height: 45px;
+                        width: 100px;
+                        border: 2px solid #333;
+                        margin: .5rem 0.45rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-decoration: none;
+                        border-radius: 1em;
+                        cursor: pointer;
+                        font-size: 1.1rem;
+                        transition: .3s;
+
+                        &:hover {
+                            color: #4481eb;
+                            border-color: #4481eb;
+                            transform-origin: center;
+                            transform: scale(.9) translateY(-3px) skew(5deg);
+                            border-radius: 1.5em;
+                            -webkit-box-shadow: 0px 3px 16px -4px rgba(0, 0, 0, 0.75);
+                            -moz-box-shadow: 0px 3px 16px -4px rgba(0, 0, 0, 0.75);
+                            box-shadow: 0px 3px 16px -4px rgba(0, 0, 0, 0.75);
+                        }
+                    }
+
+                    .social-icons:first-child {
+                        border: 2px solid rgba(0, 128, 0, 0.792);
+
+                        &:hover {
+                            color: #4481eb;
+                            border-color: #4481eb;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .panels-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        @include media($mobo) {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 2fr 1fr;
+        }
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: space-around;
+            text-align: center;
+            z-index: 7;
+            position: relative;
+
+            @include media($mobo) {
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                padding: 2.5rem 8%;
+            }
+
+            .content {
+                color: #fff;
+                // padding-top: 1em;
+                transition: .9s .6s ease-in-out;
+
+                @include media($mobo) {
+                    padding-right: 15%;
+                }
+
+                @include media(570px) {
+                    padding: 0.5rem 1rem;
+                }
+
+                h3 {
+                    font-weight: 600;
+                    line-height: 1;
+                    font-size: 1.5rem;
+
+                    @include media($mobo) {
+                        font-size: 1.2rem;
+                    }
+                }
+
+                p {
+                    font-size: 0.95rem;
+                    padding: .7rem 0;
+
+                    @include media($mobo) {
+                        font-size: 0.7rem;
+                        padding: 0.5rem 0;
+                    }
+                }
+
+                button {
+                    @extend .my-btn;
+                    margin: 0;
+                    margin: 0;
+                    background: none;
+                    border: 2px solid #fff;
+                    width: 130px;
+                    height: 41px;
+                    font-weight: 600;
+                    font-size: 0.8rem;
+
+                    @include media($mobo) {
+                        width: 110px;
+                        height: 35px;
+                        font-size: 0.7rem;
+                    }
+                }
+            }
+
+            .slideshow {
+                width: 100%;
+                transition: 0.9s 0.6s ease-in-out;
+                border: 2px solid transparent;
+                border-radius: 12px;
+                transform: scale(1.25) scaleY(1.1);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+
+                video {
+                    width: 100%;
+                    display: flow-root;
+                    margin-top: -25px;
+                    margin-bottom: 6px;
+                    transform: scaleX(1.34) scaleY(1.23);                    
+                    @include media(1125px){
+                        margin-top: -22px!important;
+                        margin-bottom: 4px!important;
+                    }
+                    @include media(900px){
+                        margin-top: -16px!important;
+                        margin-bottom: 4px!important;
+                    }
+                }
+
+
+                @include media($mobo) {
+                    display: none!important;
+                }
+
+                @include media(570px) {
+                    display: none;
+                }
+            }
+
+        }
+
+        .left-panel {
+            padding: 3rem 17% 2rem 12%;
+            pointer-events: all;
+
+            @include media($mobo) {
+                grid-row: 1 / 2;
+            }
+        }
+
+        .right-panel {
+            pointer-events: none;
+            padding: 3rem 12% 2rem 17%;
+
+            @include media($mobo) {
+                grid-row: 3 / 4;
+            }
+
+            .content {
+                transform: translateX(800px);
+
+                @include media($mobo) {
+                    transform: translateY(300px);
+                }
+            }
+
+            .image {
+                transform: translateX(800px);
+
+                @include media($mobo) {
+                    transform: translateY(300px);
+                    transition: 0.9s 0.8s ease-in-out;
+                }
+            }
+        }
+
+    }
+}
+
+form.sign-in-form {
+    z-index: 2;
+}
+
+form.sign-up-form {
+    z-index: 1;
+    opacity: 0;
+}
+
+.sign-up-mode:before {
+    transform: translate(100%, -50%);
+    right: 50%;
+
+    @include media($mobo) {
+        transform: translate(-50%, 100%);
+        bottom: 32%;
+        right: initial;
+    }
+
+    @include media(570px) {
+        bottom: 28%;
+        left: 50%;
+    }
+}
+
+.moboslide{
+    border: 2px solid transparent!important;
+    border-radius: 6px!important;
+    width: 48%!important;
+    transition: all .3s ease-in-out!important;
+    transform: scaleY(3.3) translateX(-294px)!important;
+    margin-bottom: 34px !important;
+
+    @include media(1140px){
+        display: none!important;
+    }
+
+    video{
+        transform: scaleX(3.75) scaleY(1.02)!important;
+        margin-bottom: -6px!important;
+        margin-top: -19px!important;
+    
+    }
+}
+
+// !ANIMATIONS
+
+.loginpage-container.sign-up-mode .left-panel .slideshow,
+.loginpage-container.sign-up-mode .left-panel .content {
+    transform: translateX(-800px);
+
+    @include media($mobo) {
+        transform: translateY(-300px);
+    }
+}
+
+.loginpage-container.sign-up-mode .right-panel .slideshow,
+.loginpage-container.sign-up-mode .right-panel .content {
+    transform: translateX(0px);
+}
+
+.loginpage-container.sign-up-mode .left-panel {
+    pointer-events: none;
+    
+}
+.loginpage-container .right-panel.slideshow {
+    pointer-events: none;
+    display: none;
+    
+}
+
+.loginpage-container.sign-up-mode .right-panel {
+    pointer-events: all;
+}
+
+.loginpage-container.sign-up-mode .signin-signup {
+    left: 25%;
+
+    @include media($mobo) {
+        top: 5%;
+        transform: translate(-50%, 0);
+        left: 50%;
+    }
+}
+
+.loginpage-container.sign-up-mode form.sign-in-form {
+    z-index: 1;
+    opacity: 0;
+}
+
+.loginpage-container.sign-up-mode form.sign-up-form {
+    z-index: 2;
+    opacity: 1;
+}

@@ -1,22 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useFirebase } from '@/firebase/firebase';
 import { PostPopup } from '@/components/PostPopup';
 import { LeftBar } from "@/components/LeftBar";
 import { useSocial } from "@/context/Context";
+import { PostPopUp } from '@/components/PostPopUp';
+import { getAuth } from "firebase/auth";
+
+const auth = getAuth();
+
 const SavedPosts = () => {
     const router = useRouter();
     const fb = useFirebase();
-    const { exploreData, GetExploreData, docSize, shuffleArrayOfObjects } = fb;
+    const { exploreData, GetExploreData, docSize, shuffleArrayOfObjects, createPostsCollection } = fb;
     const Context = useSocial();
-    const { ClickPost, explorePopUp, setExplorePopUp } = Context;
+    const { ClickPost, explorePopUp, setExplorePopUp, setIsUser, isUser } = Context;
+    
+    useLayoutEffect(()=>{
+        const unsubscribe = auth.onAuthStateChanged((user)=>{
+            user  ? setIsUser(true) : router.push("Login")
+        })
+        return () => {
+            unsubscribe();
+        };
+    },[])
+
     useEffect(() => {
         GetExploreData(docSize)
     }, [])
     return (
         <>
-            <div style={{ marginLeft: '1em', cursor: 'pointer' }}>
+           { isUser && 
+           <>
+           <div className="saved-header">
 
                 <span style={{
                     display: "flex",
@@ -42,24 +59,35 @@ const SavedPosts = () => {
                     </span>
                 </span>
             </div>
-            {/* <div className="saved-explore-container"> */}
-                <div className="explore-container">
-                    {
-                        exploreData &&
-                        exploreData.map((media, index) => {
-                            return (
-                                <React.Fragment key={media.id}>
-                                    {media.preference === "saved" && (
-                                        <div className="posts-box" >
-                                            <img src={media.file} alt="Random Image" className='main-posts' />
+            <div className="explore-container" onClick={ClickPost}>
+                {
+                    exploreData &&
+                    exploreData.map((media, index) => {
+                        return (
+                            <React.Fragment key={media.id}>
+                                {media.preference === "saved" && (
+                                    <div className="posts-box" onClick={createPostsCollection} >
+                                        <img src={media.file} alt="Random Image" className='main-posts' image={media.file} data-name={media.id}/>
+                                    </div>
+                                )}
+                                {media.preference === "savedReel" && (
+                                    <div className="reels-box"  key={media.id} onClick={createPostsCollection}>
+                                        <video src={media.file} loop data-name={media.id} image={media.file}/>
+                                        <div className="ripple-container">
                                         </div>
-                                    )}
-                                </React.Fragment>
-                            )
-                        })
-                    }
-                </div>
-            {/* </div> */}
+                                        <Image src={`/assets/reels.svg`} height={50} width={50} alt="radimeksa" className="reel" />
+                                    </div>
+                                )}
+                            </React.Fragment>
+                        )
+                    })
+                }
+            </div>
+            </>
+            }            
+            {
+        explorePopUp && <PostPopup />
+      }
         </>
     )
 }

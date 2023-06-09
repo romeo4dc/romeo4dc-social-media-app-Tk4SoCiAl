@@ -22,6 +22,9 @@ $small:400px;
         inset: 0;
         margin: auto;
         display: flex;
+        border-radius: .5em;
+        overflow: hidden;
+
 
         @include media($mobo){
             min-width: 100%;
@@ -41,6 +44,10 @@ $small:400px;
             img {
                 width: 100%;
                 height: 100%;
+                object-fit: cover;
+            }
+            video{
+                object-fit: cover;
             }
         }
 
@@ -104,6 +111,7 @@ $small:400px;
                         -webkit-text-stroke: .2px;
                         font-size: .85rem;
                         letter-spacing: .5px;
+                        cursor: pointer;
                     }
                 }
             }
@@ -190,6 +198,10 @@ $small:400px;
                                 align-items: center;
                                 width: 103.8%;
                                 position: relative;
+
+                                @include media(500px){
+                                    transform: translateY(1.5em);
+                                }
                                 .reply-user {
                                     display: flex;
                                     // align-items: center;
@@ -329,7 +341,7 @@ $small:400px;
                     transition: all .2s ease-in-out;
                     cursor: pointer;
                     text-align: right;
-
+                    width: fit-content;
                     &:hover {
                         color: rgb(0, 149, 246);
                     }
@@ -352,6 +364,10 @@ filter:contrast(0)!important;
 position: absolute;
 right: 0;
 visibility: hidden;
+}
+
+.exppost{
+    width: fit-content!important;
 }
 
 @include media($mobo){

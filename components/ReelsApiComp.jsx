@@ -16,18 +16,36 @@ const reelsFetcher = async (url) => {
  }
 }
 export const ReelsApiComp=()=>{
+const [page, setPage] = useState(1);
+ const [loading, setLoading] = useState(true);
 const [speaker, setSpeaker] = useState(true);
 const [reelPlayer, setReelPlayer] = useState(true);
 const [reelsData, setReelsData] = useState(null); 
 const [reel, setReel] = useState();    
 
 const { data : reelsApiData, error: reelsError } =  useSWR(`https://api.pexels.com/videos/
-popular?page=1&per_page=10`, reelsFetcher);
+popular?page=${page}&per_page=5`, reelsFetcher);
 useEffect(()=>{
+    setLoading(true)
     if(reelsApiData){
-    setReelsData(reelsApiData.videos)
+    setReelsData(prev => prev ?  [...prev,  ...reelsApiData.videos] : [...reelsApiData.videos])
 }
-},[reelsApiData]);
+setLoading(false)
+},[reelsApiData, page]);
+
+const handleScroll=()=>{
+    if(window.innerHeight + document.documentElement.scrollTop + 1 
+      >= document.documentElement.scrollHeight
+      ){
+        setLoading(true)
+      setPage(prev => prev + 1)
+    }
+  }
+
+  useEffect(()=>{
+    window.addEventListener('scroll',handleScroll)
+    return ()=>window.removeEventListener('scroll', handleScroll)
+  },[])
 
 
 const Reaction=(e)=>{
@@ -87,8 +105,8 @@ const Reaction=(e)=>{
                                                     <span style={{
                                                         fontSize: '.9rem',
                                                         letterSpacing: '.3px',
-                                                        position:'relative'
-                                                    }}>{media.url}</span>
+                                                        position:'relative',
+                                                    }}>{`This video is from ${media.url}`}</span>
                                                     <span style={{ color: 'rgb(141 141 141)' }}> ...more</span>
                                                     <div className="reaction" onClick={Reaction}>
                                                         <div className="reels like">
@@ -173,6 +191,13 @@ const Reaction=(e)=>{
                             width: "200px"
                         }} />
                     </div>
+            }
+            {
+                loading &&
+                <div className="loading-cards" style={{height:"300px!important"}}>          
+          <img src="https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="" />         
+          </div>          
+               
             }
         </>
     )

@@ -10,6 +10,9 @@ export const SocialProvider = ({ children }) => {
     const [mainBarSrc, setMainBarSrc] = useState(false);
     const [createBtn, setCreateBtn] = useState(false);
     const [storyPopup, setStoryPopup] = useState(false)
+    const [isUser, setIsUser] = useState(false);    
+    const [isFollowed, setIsFollowed] = useState(false)
+
     
     const Caption = (e) => {
         setTextAreaValue(e.target.value)
@@ -18,7 +21,8 @@ export const SocialProvider = ({ children }) => {
 
     const ClickPost = (e) => {
         setExplorePopUp(true)
-        if (e.target.tagName === 'IMG') {
+        
+        if (e.target.tagName === 'IMG') {            
             setExploreSrc(e.target.src)
             setPopUpSrc(true)
         } else if (e.target.tagName === 'VIDEO') {
@@ -26,6 +30,7 @@ export const SocialProvider = ({ children }) => {
             setPopUpSrc(false)
         }
     }
+
 
     const autoResize=()=>{
         const textArea = document.querySelector("#postTextArea")
@@ -35,7 +40,7 @@ export const SocialProvider = ({ children }) => {
 
 
     return (
-        <SocialContext.Provider value={{ popUp, setPopUp, textAreaValue, ClickPost, explorePopUp, setExplorePopUp, exploreSrc, popUpSrc, Caption, mainBarSrc, setMainBarSrc, setCreateBtn, setStoryPopup, storyPopup, createBtn, autoResize }}>
+        <SocialContext.Provider value={{ popUp, setPopUp, textAreaValue, ClickPost, explorePopUp, setExplorePopUp, exploreSrc, popUpSrc, Caption, mainBarSrc, setMainBarSrc, setCreateBtn, setStoryPopup, storyPopup, createBtn, autoResize, setPopUpSrc, isUser, setIsUser, isFollowed, setIsFollowed }}>
             {children}
         </SocialContext.Provider>
     )

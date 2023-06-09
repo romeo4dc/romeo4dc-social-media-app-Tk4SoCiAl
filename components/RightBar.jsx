@@ -31,25 +31,26 @@ export const RightBar = () => {
         padding:'0em .5em'
         }}>Messages</span>
       <div className="searchsec">
-        <Image src={`assets/search.svg`} height={15} width={15} alt="" />
+        <Image src={`/assets/search.svg`} height={15} width={15} alt="" />
         <input type="text" placeholder="Search messages" />
       </div>
       <div className="categories">
       <div className="category">
-      { rightBar.map((val, ind)=>{
+      { 
+        rightBar.map((val, ind)=>{
         return(
           <li className={value === ind ? "rightbarliactive" : undefined} onClick={()=>setValue(ind)} key={ind}>{val}</li>
         )
       })
       }
         </div>
-        <div className="users" onClick={()=>router.push('/Messages')}>
+        <div className="users" onClick={()=>router.push('/MessagesComp/Messages')}>
         {
             activeUsersData &&
             activeUsersData.map((users,ind)=>{
                 const { photoURL, displayName, uid, id } = users;
                 return(
-                    uid !== auth.currentUser.uid &&
+                    uid !== auth.currentUser.uid && auth.currentUser.displayName &&
                     <div className="user" key={ind}> 
                 <Image src={`https://res.cloudinary.com/demo/image/fetch/${photoURL}`} height={30} width={30} alt="randomImage" />
                 <div>

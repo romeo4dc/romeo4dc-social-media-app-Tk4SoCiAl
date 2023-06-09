@@ -123,7 +123,9 @@ $mobo:768px;
 
         .reels {
             transition: all .3s ease-in-out;
-
+           img{
+            filter: brightness(2);
+           }
             &:hover {
                 transform: scale(1.1);
             }
@@ -190,12 +192,14 @@ $mobo:768px;
     border-radius: .5em;
     z-index: 9;
     padding-top: 1em;
-    background: transparent;
 
+    @include media(1024px){
+        margin-inline: auto;
+    }
     @include media($mobo){
         margin-inline: auto;
         width: 100%;
-        padding-inline: 1em;
+        padding-inline: 1em;        
     }
     @include media(350px){
         border: none;

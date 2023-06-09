@@ -12,10 +12,9 @@ import Image from 'next/image';
 import { use, useEffect, useState } from 'react';
 import { FieldPath, FieldValue, addDoc, collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
 
-export const MainBar = () => {
+export const MainBar = ({mid}) => {
     const [width, setWidth] = useState(0);
     const [isData, setIsData] = useState("all");
-    const [vidApiData, setVidApiData] = useState(null);
     const [storyPostsData, setStoryPostsData] = useState();
     const popUpBox = useSocial();
     const { setPopUp, setStoryPopup, storyPopup, explorePopUp, setExplorePopUp } = popUpBox;
@@ -59,10 +58,6 @@ export const MainBar = () => {
 
     }
 
-    const cellFunc = async (e) => {
-        setStoryPopup(true)
-
-    }
 
     return (
         <>
@@ -73,7 +68,7 @@ export const MainBar = () => {
                             myStoriesData.map((val, ind) => {
                                 return (
                                     <div className="story-wrapper" key={val.name}>
-                                        <div className='story' onClick={cellFunc} style={{ background: `url(${val.coverimg})no-repeat center/cover` }}>
+                                        <div className='story' onClick={()=> setStoryPopup(true)} style={{ background: `url(${val.coverimg})no-repeat center/cover` }}>
                                             <Image src={`${val.img}`} width={50} height={50} alt="randomImage" className="img-cells" data-name={val.name} />
                                             <span>{val.name}</span>
                                         </div>
@@ -129,7 +124,7 @@ export const MainBar = () => {
                 {isData === "reels" && <ReelsComp />}
             </motion.div>
             {storyPopup && <StoryComp storyPostsData={storyPostsData} />}
-            {explorePopUp && <PostPopup />}
+            {explorePopUp && <PostPopup/>}
         </>
     )
 }

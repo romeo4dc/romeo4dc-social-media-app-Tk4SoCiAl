@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import Image from 'next/image';
 import { useFirebase } from '@/firebase/firebase';
 import { useSocial } from '@/context/Context';
@@ -9,17 +9,28 @@ import { UserPosts } from "@/components/UserDetails/UserPosts";
 import { UserSaved } from "@/components/UserDetails/UserSaved";
 import { UserTagged } from "@/components/UserDetails/UserTagged";
 import { useRouter } from "next/router";
+import { getAuth } from "firebase/auth";
+const auth = getAuth();
 const UserProfile = () => {
     const [isActive, setIsActive] = useState("posts");
     const fb = useFirebase();
     const popUpBox = useSocial();
     const router = useRouter();
     const { GetExploreData, docSize, userData, currentUserData, uploadToFirestore, userDetails, getBackgroundImage, getGradientData, getFontsSizeData, getThemesData } = fb;
-    const { setCreateBtn, popUp, explorePopUp, ClickPost, setIsNavbar } = popUpBox;
+    const { setCreateBtn, popUp, explorePopUp, ClickPost, setIsNavbar, isUser, setIsUser } = popUpBox;
+
+    useLayoutEffect(()=>{
+        const unsubscribe = auth.onAuthStateChanged((user)=>{
+            user  ? setIsUser(true) : router.push("Login")
+          })
+          return () => {
+            unsubscribe();
+          };
+    },[])
 
     useEffect(() => {
         GetExploreData(docSize);
-        userData();
+        userData(); 
         getGradientData();
         getFontsSizeData();
         getBackgroundImage();
@@ -28,22 +39,31 @@ const UserProfile = () => {
 
     return (
         <>
-            <div className="user-profile-container" >
+           { isUser && <div className="user-profile-container" >
                 <LeftBar />
                 <div className="user-profile-content" >
                     <div className="user-details">
                         <div className="user-bio">
                             <div className="user-img">
-                                {userDetails &&
-                                    userDetails ?
-                                    <img src={userDetails.userimg} alt="" />
-                                    :
-                                    <img src="https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="" />
+                                {userDetails  ?
+                                    (
+                                        <img src={userDetails.userimg} alt="" />
+                                    ) : (
+                                        <img src="https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="" />
+                                    )
                                 }
                                 <label htmlFor="userdata">
-                                    <Image src={`/assets/camera.svg`} alt="user" width={20} height={20} /></label>
+                                    <Image 
+                                    src={`/assets/camera.svg`} 
+                                    alt="user" 
+                                    width={20} 
+                                    height={20} />
+                                    </label>
                             </div>
-                            <input type="file" id="userdata" onChange={uploadToFirestore} style={{
+                            <input 
+                            type="file" 
+                            id="userdata" 
+                            onChange={uploadToFirestore} style={{
                                 visibility: 'hidden',
                                 pointerEvents: 'none',
                                 position: 'absolute'
@@ -51,7 +71,7 @@ const UserProfile = () => {
                             {
                                 userDetails &&
                                 <>
-                                    <span>name</span>
+                                    <span>{`@${userDetails.username}`}</span>
                                     <div>
                                         <span>{userDetails.userbio}</span>
                                     </div>
@@ -62,11 +82,16 @@ const UserProfile = () => {
                             {userDetails &&
                                 <>
                                     <div>
-                                        <span>{userDetails.username}</span>
+                                        {auth.currentUser ? 
+                                        <span>{auth.currentUser.displayName}</span> 
+                                        : 
+                                        <span>username</span>}
                                         <button onClick={() => router.push("EditProfile")}>Edit Profile</button>
                                     </div>
                                     <div>
-                                        <span>3 posts</span> <span>74 followers</span><span>152 following</span>
+                                        <span>3 posts</span> 
+                                        <span>74 followers</span>
+                                        <span>152 following</span>
                                     </div>
                                 </>
                             }
@@ -82,7 +107,13 @@ const UserProfile = () => {
                                     () =>
                                         setIsActive("posts")
                                 }>
-                                <Image src={`/assets/user-post.svg`} className="userProfileImg" alt="user" width={18} height={18} />
+                                <Image 
+                                src={`/assets/user-post.svg`} 
+                                className="userProfileImg" 
+                                alt="user" 
+                                width={18} 
+                                height={18}
+                                 />
                                 <span className={isActive === "posts" ? "userspanactive" : undefined}>POSTS</span>
                             </li>
 
@@ -92,7 +123,12 @@ const UserProfile = () => {
                                     () =>
                                         setIsActive("saved")
                                 }>
-                                <Image src={`/assets/user-saved.svg`} className="userProfileImg" alt="user" width={18} height={18} />
+                                <Image 
+                                src={`/assets/user-saved.svg`} 
+                                className="userProfileImg" 
+                                alt="user" 
+                                width={18} 
+                                height={18} />
                                 <span className={isActive === "saved" ? "userspanactive" : undefined}>SAVED</span></li>
 
                             <li
@@ -100,7 +136,12 @@ const UserProfile = () => {
                                     () =>
                                         setIsActive("tagged")
                                 }>
-                                <Image src={`/assets/user-tagged.svg`} className="userProfileImg" alt="user" width={18} height={18} />
+                                <Image 
+                                src={`/assets/user-tagged.svg`} 
+                                className="userProfileImg" 
+                                alt="user" 
+                                width={18} 
+                                height={18} />
                                 <span
                                     className={isActive === "tagged" ? "userspanactive" : undefined}>TAGGED</span>
                             </li>
@@ -110,7 +151,7 @@ const UserProfile = () => {
                     {isActive === "saved" && <UserSaved />}
                     {isActive === "tagged" && <UserTagged />}
                 </div>
-            </div>
+            </div>}
             {popUp && <Post />}
             {explorePopUp && <PostPopup />}
         </>

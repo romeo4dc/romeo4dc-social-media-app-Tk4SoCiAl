@@ -94,23 +94,36 @@ export const Post = () => {
         <div className="wrapper">
             {uploading && (
                 <div className="loading-container">
-                    <img src="assets/pinkdots.gif" alt="randomImage" />
+                    <img src="/assets/pinkdots.gif" alt="randomImage" />
                 </div>
             )}
             <div className="pcontainer">
                 <div className="header">
                     <span>Create a Post</span>
-                    <Image alt="randomImage" src={`assets/cross.svg`} height={25} width={25} onClick={() => {
+                    <Image 
+                    alt="randomImage" 
+                    src={`/assets/cross.svg`} 
+                    height={25} 
+                    width={25} 
+                    onClick={() => {
                         setPopUp(false)
                         setIsPostSelector(false)
                         } }style={{ cursor: 'pointer' }} />
                 </div>
                 <div className="userheader">
-                    <Image alt="randomImage" src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} height={40} width={40} />
+                    <Image 
+                    alt="randomImage" 
+                    src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} 
+                    height={40} 
+                    width={40} />
                     <span>Tushar Kumar</span>
                 </div>
                 <div className="text" >
-                    <textarea onChange={Caption} onInput={autoResize} id="postTextArea" placeholder='What do you want to post?' />
+                    <textarea 
+                    onChange={Caption} 
+                    onInput={autoResize} 
+                    id="postTextArea" 
+                    placeholder='What do you want to post?' />
                     { isPostSelector &&(
                         isPostVideo ? <div><video src={URL.createObjectURL(selectedPost)} alt="" /></div>
                         : 
@@ -120,16 +133,33 @@ export const Post = () => {
                 <div className="senditems">
                     <div className="postitems">
                         <label htmlFor="gallery" >
-                            <Image style={{ filter: 'brightness(0.5)' }} alt="randomImage" src={`assets/gallery.svg`} height={20} width={20} onClick={() => setIsPost(true)} />
+                            <Image 
+                            style={{ filter: 'brightness(0.5)' }} 
+                            alt="randomImage" 
+                            src={`/assets/gallery.svg`} 
+                            height={20} 
+                            width={20} 
+                            onClick={() => setIsPost(true)} />
                         </label>
                         <label htmlFor="video">
-                            <Image alt="randomImage" src={`assets/video.svg`} height={20} width={20} onClick={() => setIsPost(false)} />
+                            <Image 
+                            alt="randomImage" 
+                            src={`/assets/video.svg`} 
+                            height={20} 
+                            width={20} 
+                            onClick={() => setIsPost(false)} />
                         </label>
                         <label htmlFor="">
-                            <Image alt="randomImage" src={`assets/type.svg`} height={20} width={20} onClick={()=>setIsPostSelector(false)}/>
+                            <Image 
+                            alt="randomImage" 
+                            src={`/assets/type.svg`} 
+                            height={20} 
+                            width={20} 
+                            onClick={()=>setIsPostSelector(false)}/>
                         </label>
                     </div>
-                    <button onClick={isPost ? UploadToFirestore : UploadVideoToFirestore} className='postuploadbutton'>Post</button>
+                    <button 
+                    onClick={isPost ? UploadToFirestore : UploadVideoToFirestore} className='postuploadbutton'>Post</button>
                     <input type="file" id='gallery' onChange={HandleFileChange} />
                     <input type="file" id="video" accept="video/*" onChange={HandleVideoChange} />
                 </div>

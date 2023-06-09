@@ -1,16 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import Image from "next/image";
 import { useSocial } from '@/context/Context';
 import { LeftBar } from '@/components/Leftbar';
 import { useFirebase } from '@/firebase/firebase';
-import { addDoc, collection, getFirestore } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useRouter } from "next/router";
+import { getAuth } from "firebase/auth";
+const auth = getAuth();
+
 const EditProfile=()=>{
     const Context = useSocial();
+    const {isUser, setIsUser} = Context;
     const router = useRouter();
     const fb = useFirebase();
     const { nickNameValue,textAreaValue, userData,  textArea, textAreaCounter, setNickName, nickNameCounter, updateUserDetails, getBackgroundImage, userDetails, getGradientData, getFontsSizeData, getThemesData } = fb;
+
+    useLayoutEffect(()=>{
+        const unsubscribe = auth.onAuthStateChanged((user)=>{
+            user  ? setIsUser(true) : router.push("Login")
+          })
+          return () => {
+            unsubscribe();
+          };
+    },[])
 
     useEffect(()=>{
         userData();
@@ -37,9 +48,10 @@ const EditProfile=()=>{
     }
     return(
         <>
-        <div className="edit-profile-container">
+    { isUser && <div className="edit-profile-container">
         <nav>
-            <Image src={`/assets/arrow-left.svg`}
+            <Image 
+                src={`/assets/arrow-left.svg`}
                 height={23}
                 width={23}
                 onClick={()=>router.push("/")}
@@ -55,7 +67,7 @@ const EditProfile=()=>{
           {  <div className="edit-section" >
                 <div className="edit-user-img">   
                 { userDetails ?              
-                <img src={userDetails && userDetails.userimg} alt="" /> 
+                <img src={userDetails.userimg} alt="" /> 
                 :
                 <img src="https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="" /> }
                 <div>
@@ -65,12 +77,24 @@ const EditProfile=()=>{
                 </div>
                 <div className="edit-user-nickname">
                     <span>Name</span>
-                    <input type="text" maxLength={8} placeholder="Enter Your Nickname" value={nickNameValue} onChange={setNickName}/>
+                    <input 
+                    type="text" 
+                    maxLength={8} 
+                    placeholder="Enter Your Nickname" 
+                    value={nickNameValue} 
+                    onChange={setNickName}/>
                     <span className="counter"><span>{nickNameCounter}</span>/<span>8</span></span>
                 </div>
                 <div className="edit-user-bio">
                     <span>Bio</span>
-                    <textarea  maxLength={150} required onChange={textArea} placeholder="Enter Your Bio" value={textAreaValue}></textarea>
+                    <textarea  
+                    maxLength={150} 
+                    required 
+                    onChange={textArea} 
+                    placeholder="Enter Your Bio" 
+                    value={textAreaValue}>
+
+                    </textarea>
                     <span className="counter"><span>{textAreaCounter}</span>/<span>150</span></span>
                 </div>
                 <div className="edit-user-gender">
@@ -88,7 +112,12 @@ const EditProfile=()=>{
                     <span>Terms <br/>and<br/> services</span>
                     <div>
                         <div className="checkbox">
-                        <Image src={`/assets/tick.svg`} alt="user" width={12} height={12} onClick={Check}/>
+                        <Image 
+                        src={`/assets/tick.svg`} 
+                        alt="user" 
+                        width={12} 
+                        height={12} 
+                        onClick={Check}/>
                          </div>
                         <span>You are agreeing to be bound by these Website Terms and Conditions of Use and agree that you are responsible for the agreement with any applicable local laws.</span>
                     </div>
@@ -96,7 +125,7 @@ const EditProfile=()=>{
                 <button onClick={updateUserDetails} className="submit-btn">Submit</button>
             </div>}
         </div>
-        </div>
+        </div> }
         
         </>
     )
