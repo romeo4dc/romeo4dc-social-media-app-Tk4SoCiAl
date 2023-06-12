@@ -41,7 +41,7 @@ export const LeftBar = ({setIsNotifBackground}) => {
     setThemePopUp(true);
   }
   else if(e.target.textContent === 'Messages'){
-    router.push("/MessagesComp/Messages");
+    router.push(`/MessagesComp/${auth.currentUser.uid}`);
   }
   else if(e.target.textContent === 'Settings'){
     router.push("UserProfile");

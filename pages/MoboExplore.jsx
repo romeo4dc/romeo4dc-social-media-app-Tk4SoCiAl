@@ -148,7 +148,7 @@ const MoboExplore = () => {
                 </div>
                 :
                 <div className="mobo-explore-video">
-                  <video src={exploreSrc} loop autoPlay={false} />
+                  <video src={exploreSrc} loop muted autoPlay />
                 </div>
             }
             <div className="mobo-explore-content">

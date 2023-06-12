@@ -29,7 +29,7 @@ export const MainBar = ({mid}) => {
         StoriesData()
         GetExploreData(docSize)
         getStoriesData()
-        setWidth(1250 - carousel.current.offsetWidth)
+        setWidth(carousel.current.scrollWidth * 1.65 - carousel.current.offsetWidth)
     }, []);
 
     const getStoriesData = async () => {
@@ -62,7 +62,7 @@ export const MainBar = ({mid}) => {
     return (
         <>
             <motion.div ref={carousel} className="mainbar" >
-                <motion.div drag="x" dragConstraints={{ right: 0, left: -width }} className="stories" >
+                <motion.div drag="x" dragConstraints={{ right: 0, left: -width }} className="stories">
                     {
                         myStoriesData ?
                             myStoriesData.map((val, ind) => {
