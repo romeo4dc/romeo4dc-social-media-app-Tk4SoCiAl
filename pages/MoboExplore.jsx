@@ -247,6 +247,7 @@ const MoboExplore = () => {
                           src={media.src.large2x}
                           alt="" />
                       </div>
+                      
                       <div className="mobo-explore-content">
                         <div className="mobo-explore-socialicons">
                           <div onClick={Reaction}>
@@ -269,6 +270,7 @@ const MoboExplore = () => {
                               image={media.src.tiny}
                               username={media.photographer}
                             />
+
                             <Image src={`/assets/share.svg`}
                               height={28}
                               width={28}
@@ -321,27 +323,33 @@ const MoboExplore = () => {
                             height={35}
                             width={35}
                             alt="shsladda" />
+
                           <span>{media.user.name}</span>
+
                           <Image
                             src={`/assets/dot.svg`}
                             height={30}
                             width={30}
                             alt="shsladda"
                             style={{ filter: 'invert(1)' }} />
-                          {isFollowed ? 
+
+                          {
+                            isFollowed ? 
                             <span style={{color:'#fff'}} onClick={()=>setIsFollowed(false)}>Unfollow</span> 
                             : 
                             <span onClick={()=>setIsFollowed(true)}>Follow</span>}
-                        </div>
+                        </div>                        
                         <Image
                           src={`/assets/more.svg`}
                           height={20}
                           width={20}
                           alt="shsladda" />
                       </div>
+
                       <div className="mobo-explore-video">
                         <video src={media.video_files[0].link} loop muted autoPlay />
                       </div>
+
                       <div className="mobo-explore-content">
                         <div className="mobo-explore-socialicons">
                           <div onClick={Reaction}>
@@ -363,10 +371,12 @@ const MoboExplore = () => {
                               image={media.video_pictures[0].picture}
                               username={media.user.name}
                                />
+
                             <Image src={`/assets/share.svg`}
                               height={28}
                               width={28}
                               alt="shsladda" />
+
                           </div>
                           <Image
                             style={{ marginRight: '-1em' }}
@@ -393,6 +403,7 @@ const MoboExplore = () => {
                           }}>{`This post video is created and managed by (${media.user.name}) and it's url is=${media.url}`}</span></span>
 
                         <br />
+
                         <span style={{
                           color: "#808080",
                           lineHeight: '1.5em'
