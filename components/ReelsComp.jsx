@@ -248,9 +248,14 @@ export const ReelsComp = () => {
                     </div>
             }
 
-            <div className="loading-cards">
-                <img src="https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="" />
-            </div>
+            <Image 
+            src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
+            height={100} 
+            width={100} 
+            alt="daasd" 
+            style={{
+                filter: 'hue-rotate(45deg) drop-shadow(2px -1px 6px black)', 
+                margin:'0 auto'}}/>
         </>
     )
 }

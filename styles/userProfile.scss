@@ -78,6 +78,7 @@ $tablet: 1250px;
                 @include media($mobo) {
                     align-items: center;
                     text-align: center;
+                    margin-left: -20px;
                 }
 
 
@@ -163,12 +164,17 @@ $tablet: 1250px;
 
                 @include media($mobo) {
                     margin-top: 1.5em;
+                    margin-left: -15px;
                 }
 
                 div:first-child {
                     display: flex;
                     gap: 1em;
                     align-items: center;
+
+                    @include media(400px){
+                        gap:.5em;                        
+                    }
 
                     span {
                         font-size: 1.2rem;
@@ -191,7 +197,7 @@ $tablet: 1250px;
                         color: #000;
                         -webkit-text-stroke: .5px;
                         background: #fff;
-                        transition: background  2s cubic-bezier(0.075, 0.82, 0.165, 1),border  2s cubic-bezier(0.075, 0.82, 0.165, 1)                        ;
+                        transition: background 2s cubic-bezier(0.075, 0.82, 0.165, 1), border 2s cubic-bezier(0.075, 0.82, 0.165, 1);
                         cursor: pointer;
 
                         @include media($mobo) {
@@ -208,11 +214,12 @@ $tablet: 1250px;
                             border: 2px solid var(--white-color);
                         }
                     }
-                    button:last-child{
-                        &:hover{
+
+                    button:last-child {
+                        &:hover {
                             background: red;
                             color: #fff;
-                            border: 2px solid #fff;                            
+                            border: 2px solid #fff;
                         }
                     }
                 }
@@ -262,11 +269,11 @@ $tablet: 1250px;
             display: flex;
             justify-content: center;
             margin: auto;
-            border: 2px solid var(--black-color);            
+            border: 2px solid var(--black-color);
             margin-bottom: 1em;
             border-radius: 5px;
 
-            @include media(1050px){
+            @include media(1050px) {
                 margin-inline: .5em;
             }
 
@@ -360,7 +367,7 @@ $tablet: 1250px;
     height: fit-content;
     display: flex;
     justify-content: center;
-    gap: 2%;
+    gap: .8em;
 
     @include media($mobo) {
         flex-direction: column;
@@ -456,6 +463,7 @@ $tablet: 1250px;
     justify-content: center;
     background: #000;
     box-sizing: border-box;
+
     img {
         border: 2px solid var(--black-color);
         border-left: none;
@@ -481,7 +489,7 @@ $tablet: 1250px;
             justify-content: space-between;
             align-items: center;
             padding: 0em 3%;
-            gap:1em;        
+            gap: 1em;
 
             div {
                 display: flex;
@@ -521,23 +529,26 @@ $tablet: 1250px;
     padding-left: 0;
     margin-inline: auto;
 }
-.saved-header{
+
+.saved-header {
     margin-left: 1em;
     cursor: pointer;
     margin-bottom: 1em;
-         
-    span{
-        @include media($mobo){
-            font-size: 2rem!important;
+
+    span {
+        @include media($mobo) {
+            font-size: 2rem !important;
         }
-        img{
+
+        img {
             margin-right: 5px;
         }
-        span{
-            @include media($mobo){
-                font-size: 2rem!important;
+
+        span {
+            @include media($mobo) {
+                font-size: 2rem !important;
                 margin-left: -5px;
-            }   
+            }
         }
     }
 }

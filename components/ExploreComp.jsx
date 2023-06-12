@@ -145,8 +145,8 @@ export const ExploreComp = () => {
                                                             setPopUpSrc(true)
                                                         }}
                                                     username={val.photographer}
-                                                    image={val.src.large2x} 
-                                                    />
+                                                    image={val.src.large2x}
+                                                />
 
                                                 <Image
                                                     className="posticons share"
@@ -275,17 +275,17 @@ export const ExploreComp = () => {
                                                                 src={`/assets/comments.svg`}
                                                                 width={28}
                                                                 height={28}
-                                                                alt="randomImage" 
+                                                                alt="randomImage"
                                                                 data-name={val.id}
                                                                 username={val.user.name}
                                                                 image={val.video_files[0].link}
-                                                                vidtiny={val.video_pictures[0].picture}    
+                                                                vidtiny={val.video_pictures[0].picture}
                                                                 onClick={
                                                                     (e) => {
                                                                         createPostsCollection(e)
                                                                         setExplorePopUp(true)
                                                                         setPopUpSrc(false)
-                                                                    }}  />
+                                                                    }} />
                                                             <span>899</span>
                                                         </div>
 
@@ -399,9 +399,14 @@ export const ExploreComp = () => {
                     </div>
             }
 
-            <div className="loading-cards">
-                <img src="https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="" />
-            </div>
+                    <Image 
+                    src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
+                    height={100} 
+                    width={100} 
+                    alt="daasd" 
+                    style={{
+                        filter: 'hue-rotate(45deg) drop-shadow(2px -1px 6px black)', 
+                        margin:'0 auto'}}/>
         </>
     )
 }

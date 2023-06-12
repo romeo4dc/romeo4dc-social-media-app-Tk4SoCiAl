@@ -208,12 +208,15 @@ const Explore = () => {
               })
             }
             <div className="loading-cards">
-              <Image
-                src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"}
-                width={40}
-                height={40}
-                alt="randomImage"
-              />
+            <Image 
+            src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
+            height={100} 
+            width={100} 
+            alt="daasd" 
+            style={{
+              filter: 'hue-rotate(45deg) drop-shadow(2px -1px 6px black)', 
+              margin:'8em auto', 
+              transform:'scale(3)'}}/>
             </div>
           </div>
         </>

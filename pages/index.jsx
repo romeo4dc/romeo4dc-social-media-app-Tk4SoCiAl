@@ -73,4 +73,5 @@ height: 100vh;
 top: 0;
 position: fixed;
 background: rgba(0,0,0,0.4);
+z-index: 999;
 `;

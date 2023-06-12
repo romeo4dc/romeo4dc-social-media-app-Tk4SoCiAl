@@ -39,7 +39,7 @@ const imageFetcher = async (url) => {
 const auth = getAuth();
 const MoboExplore = () => {
   const [page, setPage] = useState(1);
-  const [arrExploreData, setArrExploreData] = useState(null);  
+  const [arrExploreData, setArrExploreData] = useState(null);
   const [isFollowed, setIsFollowed] = useState(false)
 
   const context = useSocial();
@@ -57,7 +57,7 @@ const MoboExplore = () => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setIsUser(true)
-      } else {        
+      } else {
         router.push("/Login")
       }
     })
@@ -81,7 +81,7 @@ const MoboExplore = () => {
     }
   }
 
-  useEffect(() => {    
+  useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -104,117 +104,117 @@ const MoboExplore = () => {
 
   return (
     <>
-    {
-      isUser && 
-      <div className="mobo-explore-container">
-        <div className="mobo-explore-header">
-          <Image
-            src={`/assets/arrow-left.svg`}
-            height={25}
-            width={25}
-            alt="shsladda"
-            onClick={() => router.push("ExploreContent/Explore")} />
-          <span>Explore</span>
-        </div>
-        <div className="mobo-explore-posts">
-          <div className="mobo-explore-user">
-            <div>
-              <Image
-                src={`https://res.cloudinary.com/demo/image/fetch/${popUpSrc ? exploreSrc : videoImage}`}
-                height={35}
-                width={35}
-                alt="shsladda" />
-              <span>{username}</span>
-              <Image
-                src={`/assets/dot.svg`}
-                height={30}
-                width={30}
-                alt="shsladda"
-                style={{ filter: 'invert(1)' }} />
-              <span>Follow</span>
-            </div>
+      {
+        isUser &&
+        <div className="mobo-explore-container">
+          <div className="mobo-explore-header">
             <Image
-              src={`/assets/more.svg`}
-              height={20}
-              width={20}
-              alt="shsladda" />
+              src={`/assets/arrow-left.svg`}
+              height={25}
+              width={25}
+              alt="shsladda"
+              onClick={() => router.push("ExploreContent/Explore")} />
+            <span>Explore</span>
           </div>
-          {
-            popUpSrc ?
-              <div className="mobo-explore-image">
-                <img
-                  src={exploreSrc}
-                  alt="" />
-              </div>
-              :
-              <div className="mobo-explore-video">
-                <video src={exploreSrc} loop autoPlay={false}/>                
-              </div>
-          }
-          <div className="mobo-explore-content">
-            <div className="mobo-explore-socialicons">
-              <div onClick={Reaction}>
-                <Image src={`/assets/like.svg`}
-                  height={28}
-                  width={28}
+          <div className="mobo-explore-posts">
+            <div className="mobo-explore-user">
+              <div>
+                <Image
+                  src={`https://res.cloudinary.com/demo/image/fetch/${popUpSrc ? exploreSrc : videoImage}`}
+                  height={35}
+                  width={35}
+                  alt="shsladda" />
+                <span>{username}</span>
+                <Image
+                  src={`/assets/dot.svg`}
+                  height={30}
+                  width={30}
                   alt="shsladda"
-                  className='reels-likes'
-                />
-                <Image src={`/assets/comments.svg`}
-                  height={28}
-                  width={28}
-                  alt="shsladda"
-                  data-name={username}
-                  onClick={(e)=>{
-                    createPostsCollection(e)
-                    setExplorePopUp(true)                    
-                  }}
-                  image={exploreSrc}
-                  username={username}
-                   />
-                <Image src={`/assets/share.svg`}
-                  height={28}
-                  width={28}
+                  style={{ filter: 'invert(1)' }} />
+                <span>Follow</span>
+              </div>
+              <Image
+                src={`/assets/more.svg`}
+                height={20}
+                width={20}
+                alt="shsladda" />
+            </div>
+            {
+              popUpSrc ?
+                <div className="mobo-explore-image">
+                  <img
+                    src={exploreSrc}
+                    alt="" />
+                </div>
+                :
+                <div className="mobo-explore-video">
+                  <video src={exploreSrc} loop autoPlay={false} />
+                </div>
+            }
+            <div className="mobo-explore-content">
+              <div className="mobo-explore-socialicons">
+                <div onClick={Reaction}>
+                  <Image src={`/assets/like.svg`}
+                    height={28}
+                    width={28}
+                    alt="shsladda"
+                    className='reels-likes'
+                  />
+                  <Image src={`/assets/comments.svg`}
+                    height={28}
+                    width={28}
+                    alt="shsladda"
+                    data-name={username}
+                    onClick={(e) => {
+                      createPostsCollection(e)
+                      setExplorePopUp(true)
+                    }}
+                    image={exploreSrc}
+                    username={username}
+                  />
+                  <Image src={`/assets/share.svg`}
+                    height={28}
+                    width={28}
+                    alt="shsladda" />
+                </div>
+                <Image
+                  style={{ marginRight: '-1em' }}
+                  src={`/assets/bookmark.svg`}
+                  height={34}
+                  width={34}
                   alt="shsladda" />
               </div>
-              <Image
-                style={{ marginRight: '-1em' }}
-                src={`/assets/bookmark.svg`}
-                height={34}
-                width={34}
-                alt="shsladda" />
-            </div>
-            <span style={{
-              fontWeight: '600',
-              letterSpacing: '.7px',
-              lineHeight: '2em'
-            }}>20,101 likes</span><br />
-            <span>
               <span style={{
                 fontWeight: '600',
-                fontSize: '1.1rem',
-                letterSpacing: '.6px'
-              }}>osjdnasads </span>
-              <span style={{
-                fontWeight: '400!important',
-                lineHeight: '1.1em',
-                letterSpacing: '.5px'
-              }}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium debitis ipsa iusto repellat veritatis facere quo dolor enim. Cupiditate blanditiis, quas perspiciatis alias corporis sed recusandae? Voluptatibus non maiores doloribus.</span></span>
+                letterSpacing: '.7px',
+                lineHeight: '2em'
+              }}>20,101 likes</span><br />
+              <span>
+                <span style={{
+                  fontWeight: '600',
+                  fontSize: '1.1rem',
+                  letterSpacing: '.6px'
+                }}>osjdnasads </span>
+                <span style={{
+                  fontWeight: '400!important',
+                  lineHeight: '1.1em',
+                  letterSpacing: '.5px'
+                }}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium debitis ipsa iusto repellat veritatis facere quo dolor enim. Cupiditate blanditiis, quas perspiciatis alias corporis sed recusandae? Voluptatibus non maiores doloribus.</span></span>
 
-            <br />
-            <span style={{
-              color: "#808080",
-              lineHeight: '1.5em'
-            }}>View all 220 comments</span>
-            <br />
-            <span style={{
-              color: "#808080",
-              fontSize: '.9rem'
-            }}>JUNE 2</span>
+              <br />
+              <span style={{
+                color: "#808080",
+                lineHeight: '1.5em'
+              }}>View all 220 comments</span>
+              <br />
+              <span style={{
+                color: "#808080",
+                fontSize: '.9rem'
+              }}>JUNE 2</span>
+            </div>
           </div>
-        </div>
-        {
-          arrExploreData &&
+          {
+            arrExploreData &&
             arrExploreData.map((media, ind) => {
               return (
                 <React.Fragment key={media.id + ind}>
@@ -247,7 +247,7 @@ const MoboExplore = () => {
                           src={media.src.large2x}
                           alt="" />
                       </div>
-                      
+
                       <div className="mobo-explore-content">
                         <div className="mobo-explore-socialicons">
                           <div onClick={Reaction}>
@@ -315,7 +315,7 @@ const MoboExplore = () => {
                   )}
 
                   {media.hasOwnProperty('video_files') && (
-                    <div className="mobo-explore-posts" key={media.id + ind*3}>
+                    <div className="mobo-explore-posts" key={media.id + ind * 3}>
                       <div className="mobo-explore-user">
                         <div>
                           <Image
@@ -334,11 +334,11 @@ const MoboExplore = () => {
                             style={{ filter: 'invert(1)' }} />
 
                           {
-                            isFollowed ? 
-                            <span style={{color:'#fff'}} onClick={()=>setIsFollowed(false)}>Unfollow</span> 
-                            : 
-                            <span onClick={()=>setIsFollowed(true)}>Follow</span>}
-                        </div>                        
+                            isFollowed ?
+                              <span style={{ color: '#fff' }} onClick={() => setIsFollowed(false)}>Unfollow</span>
+                              :
+                              <span onClick={() => setIsFollowed(true)}>Follow</span>}
+                        </div>
                         <Image
                           src={`/assets/more.svg`}
                           height={20}
@@ -364,13 +364,13 @@ const MoboExplore = () => {
                               width={28}
                               alt="shsladda"
                               data-name={media.id}
-                              onClick={(e)=>{
+                              onClick={(e) => {
                                 createPostsCollection(e)
                                 setExplorePopUp(true)
                               }}
                               image={media.video_pictures[0].picture}
                               username={media.user.name}
-                               />
+                            />
 
                             <Image src={`/assets/share.svg`}
                               height={28}
@@ -419,10 +419,19 @@ const MoboExplore = () => {
                 </React.Fragment>
               )
             })
-        }
-      </div>
-    }
-      {explorePopUp && <PostPopup/>}
+          }
+        </div>
+      }
+      {explorePopUp && <PostPopup />
+      }
+      <div style={{width:'100%', display:'flex', justifyContent:'center', background:'#000'}}>
+        <img src="https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="" style={{
+          margin: '.5em auto',
+          height: '80px',
+          width: '80px',
+          filter: 'hue-rotate(45deg) drop-shadow(2px -1px 6px black)'
+        }} />
+        </div>
     </>
   )
 }

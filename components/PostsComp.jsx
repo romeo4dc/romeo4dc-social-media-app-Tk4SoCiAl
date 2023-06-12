@@ -74,9 +74,19 @@ export const PostsComp = () => {
                                             </div>
                                             <Image src={`/assets/more.svg`} width={12} height={12} alt="randomImage" />
                                         </div>
-                                        <img className="postloading" src="https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="randomImage" style={{ transform: 'scale(.5)', filter: 'hue-rotate(45deg) drop-shadow(2px -1px 10px #00000094)' }} />
+                                        <img 
+                                        className="postloading" 
+                                        src="https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="randomImage" 
+                                        style={{ 
+                                            transform: 'scale(.5)', 
+                                            filter: 'hue-rotate(45deg) drop-shadow(2px -1px 10px #00000094)' }} />
 
-                                        <img className="postimg" src={val.file} alt="randomImage" onLoad={postLoader} />
+                                        <img 
+                                        className="postimg" 
+                                        src={val.file} 
+                                        alt="randomImage" 
+                                        onLoad={postLoader} />
+
                                         <div className="socialicons">
                                             <div>
                                                 <Image className='posticons' src={`/assets/like.svg`} width={22} height={22} alt="randomImage" />
@@ -141,9 +151,14 @@ export const PostsComp = () => {
                         }} />
                     </div>
             }
-            <div className="loading-cards">
-                <img src="https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="" />
-            </div>
+            <Image 
+            src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
+            height={100} 
+            width={100} 
+            alt="daasd" 
+            style={{
+                filter: 'hue-rotate(45deg) drop-shadow(2px -1px 6px black)', 
+                margin:'0 auto'}}/>
         </>
     )
 }

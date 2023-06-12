@@ -59,16 +59,16 @@ export const Header = () => {
             </div>
             <div className="login">
                 <div className="navsocialicons">
-                    <Link href="https://www.facebook.com/profile.php?id=100022499271787">
+                    <Link href="https://www.facebook.com/profile.php?id=100022499271787" target="_blank">
                         <Image src={`/assets/fb.svg`} height={28} width={28 } alt="randmsmd" />
                     </Link>
-                    <Link href="https://twitter.com/KumarTusha52403">
+                    <Link href="https://twitter.com/KumarTusha52403" target="_blank">
                         <Image src={`/assets/twitter.svg`} height={30} width={30} alt="randmsmd" />
                     </Link>
-                    <Link href="https://www.instagram.com/tk3tushar/">
+                    <Link href="https://www.instagram.com/tk3tushar/" target="_blank">
                         <Image src={`/assets/insta.svg`} height={22} width={22} alt="randmsmd" />
                     </Link>
-                    <Link href="https://discord.com/channels/@me">
+                    <Link href="https://discord.com/channels/@me" target="_blank">
                         <Image src={`/assets/discord.svg`} height={32} width={32} alt="randmsmd" />
                     </Link>
                 </div>
