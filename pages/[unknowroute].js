@@ -5,13 +5,11 @@ const auth = getAuth();
 const Random = () => {
     const router = useRouter();
     useLayoutEffect(()=>{
-    // c
-      
+      router.push("/") 
     },[])
   return (
-    <div>
-      
-    </div>
+    <>      
+    </>
   )
 }
 
