@@ -11,7 +11,7 @@ import { getAuth } from 'firebase/auth';
 
 const auth = getAuth();
 
-export const LeftBar = () => {
+export const LeftBar = ({setIsNotifBackground}) => {
   const [data, setData] = useState(category)
   const [value, setValue] = useState(0)
   const [themePopUp, setThemePopUp] = useState(false);
@@ -25,20 +25,17 @@ export const LeftBar = () => {
     userData();
   },[])
 
-  const notificationBar=(e)=>{
-    if(e.target.textContent === 'Notifications'){
-      document.querySelector('.notif-wrapper').style.marginLeft="0%";
-    }
-  }
-  const notificationBtn=()=>{
-    document.querySelector('.notif-wrapper').style.marginLeft='-30%';
-  }
+
   const routerFunc = (e) =>{
     if(e.target.textContent === 'Explore'){
         router.push("/ExploreContent/Explore");
     }
     else if(e.target.textContent === 'Home'){
       router.push("/");
+    }
+    else if(e.target.textContent === 'Notifications'){
+      document.querySelector('.notif-wrapper').style.transform="translateX(0)";
+      setIsNotifBackground(true)
     }
     else if(e.target.textContent === 'Theme'){
     setThemePopUp(true);
@@ -58,8 +55,8 @@ export const LeftBar = () => {
   }
   return (
     <>
-    <Notifications notificationBtn={notificationBtn}/>
-    <div className="leftbarcontainer" onClick={notificationBar}>
+    <Notifications/>
+    <div className="leftbarcontainer" >
       <div className="leftbaruser">
       { auth.currentUser ? 
       userDetails && 

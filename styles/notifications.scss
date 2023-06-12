@@ -1,4 +1,9 @@
-    .follow-btn {
+@mixin media($breakpoint) {
+    @media(width < $breakpoint) {
+         @content;
+    }
+}
+.follow-btn {
         color: #fff;
         background-color: rgb(0, 149, 246);
         border: none;
@@ -14,7 +19,7 @@
         }
     }
 .notif-wrapper{    
-    width: 30%;
+    max-width: 400px;
     position: fixed;
     left: 0;
     top: 0px;
@@ -22,7 +27,7 @@
     overflow: hidden;
     box-sizing: border-box;
     height: 100%;
-    margin-left: -30%;
+    transform: translateX(-400px);
     transition: all .8s cubic-bezier(0.19, 1, 0.22, 1);
     .notification-container{
         background: #000;
@@ -39,10 +44,15 @@
             font-size: 1.8rem;
             font-weight: 700;
             letter-spacing: .2px;
+
+            @include media(1200px){
+                font-size: 1.6rem;
+            }
         }
         span:last-child{
             color: rgb(0, 149, 246);
             font-size: .9rem;
+            
         }
     }
     .this-month{

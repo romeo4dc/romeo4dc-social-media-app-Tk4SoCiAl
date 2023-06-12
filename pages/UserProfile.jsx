@@ -9,7 +9,7 @@ import { UserPosts } from "@/components/UserDetails/UserPosts";
 import { UserSaved } from "@/components/UserDetails/UserSaved";
 import { UserTagged } from "@/components/UserDetails/UserTagged";
 import { useRouter } from "next/router";
-import { getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 const auth = getAuth();
 const UserProfile = () => {
     const [isActive, setIsActive] = useState("posts");
@@ -87,6 +87,10 @@ const UserProfile = () => {
                                         : 
                                         <span>username</span>}
                                         <button onClick={() => router.push("EditProfile")}>Edit Profile</button>
+                                        <button onClick={() => {
+                                            signOut(auth)
+                                            router.push("/Login")
+                                        }}>Log Out</button>
                                     </div>
                                     <div>
                                         <span>3 posts</span> 

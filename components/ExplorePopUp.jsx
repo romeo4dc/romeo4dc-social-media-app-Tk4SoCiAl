@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import styled from "styled-components";
+import { styled } from "styled-components";
 import { useSocial } from "@/context/Context";
 import { useFirebase } from '@/firebase/firebase';
 import { useEffect } from "react";
@@ -32,7 +32,7 @@ export const ExplorePopUp = () => {
             getCommentPostTiming()
             getReplyPostTiming()
             getCommmentsCollectionSize()
-            console.log(replyPostTime,postTime)
+            
     }
     if(counter > 4){
         counter = 0;
@@ -373,7 +373,13 @@ export const ExplorePopUp = () => {
                             placeholder="Add a comment..." 
                             onChange={commentPostInput} 
                             value={postCommentsText} 
-                            className="expinput"/>
+                            className="expinput"
+                            onKeyUp={(e)=>{
+                                if(e.key === 'Enter'){
+                                    isCommentUser ? postCommentsBtn() : postReplyCommentBtn()
+                                }
+                            }}    
+                            />
                         </div>
                         {commentSend && 
                         <Image 

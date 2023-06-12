@@ -78,7 +78,6 @@ export const ExploreComp = () => {
     }, [])
 
     const Reaction = (e) => {
-
         if (e.target.classList.contains('reels-likes')) {
             e.target.src = "/assets/red-heart.svg";
             e.target.style.filter = "unset";
@@ -280,7 +279,7 @@ export const ExploreComp = () => {
                                                                 data-name={val.id}
                                                                 username={val.user.name}
                                                                 image={val.video_files[0].link}
-                                                                vidTiny={val.video_pictures[0].picture}    
+                                                                vidtiny={val.video_pictures[0].picture}    
                                                                 onClick={
                                                                     (e) => {
                                                                         createPostsCollection(e)

@@ -45,7 +45,7 @@ export const UserSaved = () => {
         }
 
       </div>
-      <div className="all-audios">
+      <div className="all-audios" onClick={()=>router.push("/SavedAudio")}>
         <span>Audio</span>
         <div className="all-audios-items">
           <img src="https://images.pexels.com/photos/4407688/pexels-photo-4407688.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="user"  />

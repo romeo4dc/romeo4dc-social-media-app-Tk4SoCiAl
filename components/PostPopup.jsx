@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import styled from "styled-components";
+import { styled } from "styled-components";
 import { useSocial } from "@/context/Context";
 import { useFirebase } from '@/firebase/firebase';
 import { useEffect } from "react";
@@ -280,11 +280,8 @@ export const PostPopup = () => {
                                 width={40} 
                                 height={40} 
                                 alt="randomImage" 
-                                style={{ 
-                                    position: 'absolute', 
-                                    right: '23%', 
-                                    top:'38%', 
-                                    filter:'hue-rotate(45deg) drop-shadow(0px -1px 4px rgba(0, 0, 0, 0.523))'}} />
+                                className="comments-loading"
+                                 />
                         }
                     </div>
 
@@ -342,6 +339,11 @@ export const PostPopup = () => {
                             type="text" 
                             placeholder="Add a comment..." 
                             onChange={commentPostInput} 
+                            onKeyUp={(e)=>{
+                                if(e.key === 'Enter'){
+                                    isCommentUser ? postCommentsBtn() : postReplyCommentBtn()
+                                }
+                            }}
                             value={postCommentsText} />
                         </div>
                         {commentSend && 
@@ -354,11 +356,7 @@ export const PostPopup = () => {
                             position: 'absolute', 
                             left: '50%', 
                             filter:'hue-rotate(45deg) drop-shadow(2px -1px 10px #00000094' }} />}
-                        <span onClick={isCommentUser ? postCommentsBtn : postReplyCommentBtn} onKeyUp={(e)=>{
-                         if(e.key === 'Enter'){                            
-                          isCommentUser ? postCommentsBtn() : postReplyCommentBtn()
-                         }
-                        }}>Post</span>
+                        <span onClick={isCommentUser ? postCommentsBtn : postReplyCommentBtn} >Post</span>
                     </div>
                 </div>
             </div>

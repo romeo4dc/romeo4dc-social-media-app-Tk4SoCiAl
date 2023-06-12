@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import Image from "next/image";
 import { useSocial } from '@/context/Context';
-import { LeftBar } from '@/components/Leftbar';
+import { LeftBar } from '../components/LeftBar';
 import { useFirebase } from '@/firebase/firebase';
 import { useRouter } from "next/router";
 import { getAuth } from "firebase/auth";

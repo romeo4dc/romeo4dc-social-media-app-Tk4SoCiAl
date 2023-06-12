@@ -14,6 +14,7 @@ import '@/styles/editprofile.scss';
 import '@/styles/notifications.scss';
 import '@/styles/messages.scss';
 import '@/styles/loginpage.scss';
+import '@/styles/moboexplore.scss';
 import { SocialProvider } from '@/context/Context';
 import type { AppProps } from 'next/app'
 import { FirebaseProvider } from '@/firebase/firebase';

@@ -14,15 +14,18 @@ $mobo: 768px;
     outline: none;
     border-radius: 49px;
     cursor: pointer;
-    background-color: #5995fd;
+    background-color: #00DBDE;
+    background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
     color: #fff;
     text-transform: uppercase;
     font-weight: 600;
     margin: 10px 0;
-    transition: .5s;
+    transition: all .5s!important;
+    background-size: 200% auto;
 
     &:hover {
-        background-color: #4d84e2;
+        // background-color: #4d84e2;.
+        background-position: right;
     }
 }
 
@@ -44,7 +47,9 @@ $mobo: 768px;
         width: 2000px;
         height: 2000px;
         border-radius: 50%;
-        background: linear-gradient(-45deg, #4481eb, #04befe);
+        // background: linear-gradient(-45deg, #4481eb, #04befe);        
+        background-color: #00DBDE;
+        background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);        
         top: -10%;
         right: 48%;
         transform: translateY(-50%);
@@ -288,7 +293,7 @@ $mobo: 768px;
                     @extend .my-btn;
                     margin: 0;
                     margin: 0;
-                    background: none;
+                    // background: none;
                     border: 2px solid #fff;
                     width: 130px;
                     height: 41px;

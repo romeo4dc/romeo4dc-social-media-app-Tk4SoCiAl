@@ -3,9 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useFirebase } from '@/firebase/firebase';
 import { PostPopup } from '@/components/PostPopup';
-import { LeftBar } from "@/components/LeftBar";
 import { useSocial } from "@/context/Context";
-import { PostPopUp } from '@/components/PostPopUp';
 import { getAuth } from "firebase/auth";
 
 const auth = getAuth();

@@ -351,15 +351,14 @@ a {
   color:blue;
 }
 
+.cross{
+  display: none;
+}
 @media(width < 1200px){
   .storylogo{
     display: none;
-  }
-  .storycross{
-    display: none;
-  }
+  }  
 }
-
 @media(width < 1024px){
   .active{
     padding-left: 0px!important;
@@ -377,9 +376,9 @@ a {
  .container{
   justify-content: center;
  }
-.cross{
-  display: none;
-}
+ .storycross{
+  right: .5em;
+ }
  .active{
   border-left: none;
   border-top: 5px solid;
@@ -387,6 +386,14 @@ a {
   border-image-slice: 1;
   border-radius: .5em;
  }
+}
+@media(width < 570px){
+  .storycross{
+    left: 0;
+    right: auto;
+    transform: scale(.7);
+    z-index: 99999;
+  }
 }
 .divright{
   display: none;

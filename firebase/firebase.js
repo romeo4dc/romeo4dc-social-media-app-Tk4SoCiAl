@@ -545,7 +545,7 @@ export const FirebaseProvider = ({ children }) => {
         setPostUserName(username)
         let userImg = e.target.getAttribute('image')        
         setPostImage(userImg)
-        let tinyVideoImg = e.target.getAttribute('vidTiny');
+        let tinyVideoImg = e.target.getAttribute('vidtiny');
         // console.log(tinyVideoImg)
         setTinyVideoImg(tinyVideoImg)
         try {

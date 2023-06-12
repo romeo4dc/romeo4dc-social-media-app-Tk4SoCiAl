@@ -1,0 +1,90 @@
+.mobo-explore-container{
+    width: 100%;
+    background: #000;
+    color: #fff;
+    position: relative;
+
+    .mobo-explore-header{
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        padding:.9em;
+        border-bottom: 1.5px solid #8080806b;
+        span{
+            font-size: 1.1rem;
+        }
+        img{
+         position: absolute;
+         left: 1em;
+         top: .7em;
+        }
+        
+    }
+    .mobo-explore-posts{
+      .mobo-explore-user{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding:.6em 1em;
+        div{
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img:first-child{
+                margin-right: 1em;
+            }
+
+            span{
+                font-size: 1.1rem!important;
+                font-weight: 600;
+                letter-spacing: .5px;                
+            }
+            span:last-child{
+                color:rgb(0, 149, 246);
+                font-size: 1rem!important;
+                margin: 0 1em;  
+            }
+        }
+        img{
+            border-radius: 50%;
+        }
+      }
+      .mobo-explore-image{
+        img{
+        width: 100%;
+        object-fit: cover;
+    }
+}
+    .mobo-explore-video{
+        display: flex;
+        position: relative;
+        video{
+            width: 100%;
+            object-fit: cover;
+            flex-grow: 1;
+        }
+        img{
+            position: absolute;
+            filter: invert(1);
+        }
+    }
+    .mobo-explore-content{
+        padding: 1em 1em;
+        padding-bottom: 2em;
+        .mobo-explore-socialicons{
+            display: flex;
+            justify-content: space-between;
+            padding: .5em .6em;
+         
+            div{
+                display: flex;
+                justify-content: center;
+                gap:10%;
+                width: fit-content;
+            }
+        }
+      }
+    }
+}

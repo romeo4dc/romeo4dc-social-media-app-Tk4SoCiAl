@@ -308,7 +308,7 @@ $mobo: 768px;
                 
                 aside {
                     @include media($mobo){
-                        gap: 0em;
+                        gap: .5em;
                     }
                     .message-time {
                         color:#fff;

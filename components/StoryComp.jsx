@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSocial } from '@/context/Context';
 export const StoryComp = ({ storyPostsData }) => {
@@ -7,6 +7,10 @@ export const StoryComp = ({ storyPostsData }) => {
     const [counter, setCounter] = useState(0)
     const Context = useSocial();
     const { setStoryPopup } = Context;
+
+    useEffect(()=>{
+    document.querySelector('.cross').style.display="block";
+    },[])
 
     const rightArrow = () => {
         value <= storyPostsData.length - 1 ? setValue(value + 1) : setValue(0)

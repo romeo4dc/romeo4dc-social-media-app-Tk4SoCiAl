@@ -61,7 +61,7 @@ export const MainBar = ({mid}) => {
 
     return (
         <>
-            <motion.div ref={carousel} className="mainbar">
+            <motion.div ref={carousel} className="mainbar" >
                 <motion.div drag="x" dragConstraints={{ right: 0, left: -width }} className="stories" >
                     {
                         myStoriesData ?
@@ -112,11 +112,11 @@ export const MainBar = ({mid}) => {
 
                     <span onClick={() => {
                         setIsData("posts")
-                    }} className={isData === "posts" ? "content-active" : undefined}>POSTS</span>
+                    }} className={isData === "posts" ? "content-active" : undefined}>MY-POSTS</span>
 
                     <span onClick={() => {
                         setIsData("reels")
-                    }} className={isData === "reels" ? "content-active" : undefined}>VIDEOS</span>
+                    }} className={isData === "reels" ? "content-active" : undefined}>MY-VIDEOS</span>
 
                 </div>
                 {isData === "posts" && <PostsComp />}

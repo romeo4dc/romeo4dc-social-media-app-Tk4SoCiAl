@@ -19,12 +19,22 @@ export const Notifications = ({notificationBtn}) => {
         e.target.style.minWidth="85px";
       } 
     }
-    useEffect(()=>{
     
-    },[])
     return (
         <div className="notif-wrapper">
-        <Image src={`assets/cross.svg`} alt="randomImage" height={20} width={20} style={{filter:'invert(1)', position:'absolute',zIndex:'9',right:'0', margin:'.5em', cursor:'pointer'}} onClick={notificationBtn}/>
+        <Image 
+        src={`assets/cross.svg`} 
+        alt="randomImage" 
+        height={20} 
+        width={20} 
+        style={{
+            filter:'invert(1)', 
+            position:'absolute',
+            zIndex:'9',
+            right:'0', 
+            margin:'.5em', 
+            cursor:'pointer'}} 
+            onClick={()=>document.querySelector('.notif-wrapper').style.transform='translateX(-400px)'}/>
 
         <section className="notification-container" onClick={followBtn}>
             <div className="notify-header">
@@ -34,18 +44,54 @@ export const Notifications = ({notificationBtn}) => {
             <div className="this-month">
                 <span>This Month</span>
                 <div className="notify-sec" style={{ paddingLeft: '1em' }}>
-                    <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" height={30} width={30} />
-                    <span style={{ WebkitTextStroke: '.1px', fontWeight: '400' }}>ali_raza_mangat_,tanuj.patwal7 and why._.itzz._.akshuu <span style={{ WebkitTextStroke: '.01px', fontWeight: '400', color: "rgb(255 255 255 / 90%)" }}>liked your photo. <span style={{ color: 'rgb(168,168,168)', fontSize: '.7875rem' }}>1w</span></span></span>
-                    <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" height={45} width={45} />
+                    <Image 
+                    src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" 
+                    height={30} 
+                    width={30} />
+                    <span 
+                    style={{ 
+                        WebkitTextStroke: '.1px', 
+                        fontWeight: '400' }}>ali_raza_mangat_,tanuj.patwal7 and why._.itzz._.akshuu <span style={{ 
+                            WebkitTextStroke: '.01px', 
+                            fontWeight: '400', 
+                            color: "rgb(255 255 255 / 90%)" }}>
+                            liked your photo. 
+                            <span 
+                            style={{ color: 'rgb(168,168,168)', fontSize: '.7875rem' }}>1w</span></span></span>
+                    <Image 
+                    src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" 
+                    height={45} 
+                    width={45} />
                 </div>
                 <div className="notify-sec">
-                    <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" height={47} width={47} style={{ border: '2px solid #ff2d96', padding: '.15em' }} />
-                    <span style={{ WebkitTextStroke: '.1px', fontWeight: '400' }}>why._.itzz._.akshuu <span style={{ WebkitTextStroke: '.01px', fontWeight: '400', color: "rgb(255 255 255 / 90%)" }}>liked your photo. <span style={{ color: 'rgb(168,168,168)', fontSize: '.7875rem' }}>1w</span></span></span>
-                    <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" height={45} width={45} />
+                    <Image 
+                    src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" 
+                    height={47} 
+                    width={47} 
+                    style={{ border: '2px solid #ff2d96', padding: '.15em' }} />
+                    <span style={{ WebkitTextStroke: '.1px', fontWeight: '400' }}>why._.itzz._.akshuu <span style={{ 
+                        WebkitTextStroke: '.01px', 
+                        fontWeight: '400', 
+                        color: "rgb(255 255 255 / 90%)" }}>liked your photo. <span 
+                    style={{ color: 'rgb(168,168,168)', fontSize: '.7875rem' }}>1w</span></span></span>
+                    
+                    <Image 
+                    src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" 
+                    height={45} 
+                    width={45} />
                 </div>
+
                 <div className="notify-sec">
-                    <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" height={47} width={47} />
-                    <span style={{ WebkitTextStroke: '.1px', fontWeight: '400' }}>hrithikp999 is on tk4SoCiAl. ritikteja <span style={{ WebkitTextStroke: '.01px', fontWeight: '400', color: "rgb(255 255 255 / 90%)" }}> and 1 other follow them. <span style={{ color: 'rgb(168,168,168)', fontSize: '.7875rem' }}>3w</span></span></span>
+                    <Image 
+                    src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" 
+                    height={47} 
+                    width={47} />
+                    <span style={{ WebkitTextStroke: '.1px', fontWeight: '400' }}>hrithikp999 is on tk4SoCiAl. ritikteja 
+                    <span style={{ 
+                        WebkitTextStroke: '.01px', 
+                        fontWeight: '400', 
+                        color: "rgb(255 255 255 / 90%)" }}> and 1 other follow them. 
+                        <span style={{ color: 'rgb(168,168,168)', fontSize: '.7875rem' }}>3w</span></span></span>
 
                      <button className="follow-btn">
                     Follow
@@ -55,23 +101,40 @@ export const Notifications = ({notificationBtn}) => {
             <div className="earlier">
             <span>Earlier</span>
                 <div className="earlier-notify">
-                    <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" height={42} width={42} />
-                    <span style={{ WebkitTextStroke: '.1px', fontWeight: '400' }}>eloindia, who you might know, <span style={{ WebkitTextStroke: '.01px', fontWeight: '400', color: "rgb(255 255 255 / 90%)" }}>is on instagram. <span style={{ color: 'rgb(168,168,168)', fontSize: '.7875rem' }}>1w</span></span></span>
+                    <Image 
+                    src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" 
+                    height={42} 
+                    width={42} />
+                    <span style={{ WebkitTextStroke: '.1px', fontWeight: '400' }}>eloindia, who you might know, <span style={{ 
+                        WebkitTextStroke: '.01px', 
+                        fontWeight: '400', 
+                        color: "rgb(255 255 255 / 90%)" }}>is on instagram. 
+                        <span style={{ color: 'rgb(168,168,168)', fontSize: '.7875rem' }}>1w</span></span></span>
 
                     <button className="follow-btn">
                     Follow
                     </button>
                 </div>
                 <div className="earlier-notify">
-                    <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" height={42} width={42} />
-                    <span style={{ WebkitTextStroke: '.1px', fontWeight: '400' }}>entranador_360_apps <span style={{ WebkitTextStroke: '.01px', fontWeight: '400', color: "rgb(255 255 255 / 90%)" }}>started following you. <span style={{ color: 'rgb(168,168,168)', fontSize: '.7875rem' }}>8w</span></span></span>
+                    <Image 
+                    src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" 
+                    height={42} 
+                    width={42} />
+                    <span style={{ WebkitTextStroke: '.1px', fontWeight: '400' }}>entranador_360_apps <span style={{ 
+                        WebkitTextStroke: '.01px', 
+                        fontWeight: '400', 
+                        color: "rgb(255 255 255 / 90%)" }}>started following you. 
+                        <span style={{ color: 'rgb(168,168,168)', fontSize: '.7875rem' }}>8w</span></span></span>
 
                     <button className="follow-btn">
                     Follow
                     </button>
                 </div>
                 <div className="earlier-notify">
-                    <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" height={42} width={42} />
+                    <Image 
+                    src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" 
+                    height={42} 
+                    width={42} />
                     <span style={{
                         WebkitTextStroke: '.1px',
                         fontWeight: '400'
@@ -93,7 +156,11 @@ export const Notifications = ({notificationBtn}) => {
                     </button>
                 </div>
                 <div className="earlier-notify">
-                    <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" height={47} width={47} style={{ border: '2px solid #ff2d96', padding: '.15em' }} />
+                    <Image 
+                    src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/11001338/pexels-photo-11001338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} alt="randomImage" 
+                    height={47} 
+                    width={47} 
+                    style={{ border: '2px solid #ff2d96', padding: '.15em' }} />
                     <span style={{
                         WebkitTextStroke: '.1px',
                         fontWeight: '400'
@@ -109,13 +176,12 @@ export const Notifications = ({notificationBtn}) => {
                         color: 'rgb(168,168,168)',
                         fontSize: '.875rem'
                     }}>8w</span></span></span>
-
                     <button className="follow-btn">
                     Follow
                     </button>
                 </div>
             </div>
-        </section>
+        </section>        
         </div>
     )
 }

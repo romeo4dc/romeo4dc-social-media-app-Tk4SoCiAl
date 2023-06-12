@@ -50,7 +50,6 @@ $tablet: 1250px;
 
         .user-details {
             padding-left: 6.8em;
-            width: 98%;
             display: flex;
             height: 100%;
             gap: 8%;
@@ -192,7 +191,7 @@ $tablet: 1250px;
                         color: #000;
                         -webkit-text-stroke: .5px;
                         background: #fff;
-                        transition: all .6s cubic-bezier(0.075, 0.82, 0.165, 1);
+                        transition: background  2s cubic-bezier(0.075, 0.82, 0.165, 1),border  2s cubic-bezier(0.075, 0.82, 0.165, 1)                        ;
                         cursor: pointer;
 
                         @include media($mobo) {
@@ -207,6 +206,13 @@ $tablet: 1250px;
                             background: transparent;
                             color: var(--white-color);
                             border: 2px solid var(--white-color);
+                        }
+                    }
+                    button:last-child{
+                        &:hover{
+                            background: red;
+                            color: #fff;
+                            border: 2px solid #fff;                            
                         }
                     }
                 }
@@ -259,7 +265,10 @@ $tablet: 1250px;
             border: 2px solid var(--black-color);            
             margin-bottom: 1em;
             border-radius: 5px;
-            // border-top: 6px solid grey;
+
+            @include media(1050px){
+                margin-inline: .5em;
+            }
 
             div {
                 display: flex;
@@ -329,7 +338,7 @@ $tablet: 1250px;
                 border: 2px solid var(--black-color);
                 ;
                 height: 40%;
-                width: 32.8%;
+                width: 250px;
                 flex-grow: 1;
                 background: #000;
 
@@ -462,7 +471,7 @@ $tablet: 1250px;
 .saved-audio-container {
     .audios {
         width: 100%;
-        border: 2px solid red;
+        margin-top: 2em;
         display: flex;
         flex-direction: column;
         gap: 1em;
@@ -472,6 +481,7 @@ $tablet: 1250px;
             justify-content: space-between;
             align-items: center;
             padding: 0em 3%;
+            gap:1em;        
 
             div {
                 display: flex;
@@ -486,6 +496,7 @@ $tablet: 1250px;
                     flex-direction: column;
                     align-items: flex-start;
                     gap: 0em !important;
+                    line-height: 22px;
                 }
 
                 span {

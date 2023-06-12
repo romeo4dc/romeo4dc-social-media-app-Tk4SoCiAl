@@ -27,7 +27,7 @@ export const LoginPage = () => {
     const{ signInWithGoogle, signInWithGithub } = fb;
     const context = useSocial();
 
-    useLayoutEffect(()=>{
+    useEffect(()=>{
       const unsubscribe = auth.onAuthStateChanged((user)=>{
         user && router.push("/")
       })
@@ -78,6 +78,7 @@ export const LoginPage = () => {
                             type="email" 
                             placeholder="Email" 
                             onChange={(e)=>setSignInEmail(e.target.value)}/>
+                            {errors.email && touched.email && <p>{errors.email}</p>}
                         </div>
                         <div className="input-field">
                             <Image src={`/assets/lock.svg`} 
@@ -88,6 +89,7 @@ export const LoginPage = () => {
                             type="password" 
                             placeholder="password" 
                             onChange={(e)=>setSignInPassword(e.target.value)}/>
+                            {errors.password && touched.password && <p>{errors.password}</p>}
                         </div>
 
                         <button type="submit" className="btn solid">login</button>
@@ -126,7 +128,7 @@ export const LoginPage = () => {
                                 value={values.username}
                                 onChange={handleChange}
                                 onBlur={handleBlur} />
-                                { errors.username && touched.username ? <p>{errors.username}</p> : null}
+                                { errors.username && touched.username && <p>{errors.username}</p>}
                         </div>
                         <div className="input-field">
                             <Image src={`/assets/email.svg`} height={20} width={20} alt="email" />
@@ -151,7 +153,9 @@ export const LoginPage = () => {
                                 value={values.password}
                                 onChange={handleChange}
                                 onBlur={handleBlur} />
-                                { errors.password && touched.password && <p className="password-error">{errors.password}</p> }
+                                { 
+                                    errors.password && touched.password && <p className="password-error">{errors.password}</p> 
+                                }
                         </div>
 
                         <div className="input-field">
@@ -165,7 +169,6 @@ export const LoginPage = () => {
                                 value={values.confirm_password}
                                 onChange={handleChange}
                                 onBlur={handleBlur} />
-
                                 { errors.confirm_password && touched.confirm_password && <p>{errors.confirm_password}</p> }
                         </div>
 

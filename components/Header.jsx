@@ -51,7 +51,7 @@ export const Header = () => {
     }, [])
 
     return (
-        <nav className="navbar">
+        <div className="navbar">
             <span>Tk4SoCiAl</span>
             <div className="inputsec">
                 <Image src={`/assets/search.svg`} height={20} width={20} alt="" />
@@ -59,16 +59,16 @@ export const Header = () => {
             </div>
             <div className="login">
                 <div className="navsocialicons">
-                    <Link href="/">
+                    <Link href="https://www.facebook.com/profile.php?id=100022499271787">
                         <Image src={`/assets/fb.svg`} height={28} width={28 } alt="randmsmd" />
                     </Link>
-                    <Link href="">
+                    <Link href="https://twitter.com/KumarTusha52403">
                         <Image src={`/assets/twitter.svg`} height={30} width={30} alt="randmsmd" />
                     </Link>
-                    <Link href="">
+                    <Link href="https://www.instagram.com/tk3tushar/">
                         <Image src={`/assets/insta.svg`} height={22} width={22} alt="randmsmd" />
                     </Link>
-                    <Link href="">
+                    <Link href="https://discord.com/channels/@me">
                         <Image src={`/assets/discord.svg`} height={32} width={32} alt="randmsmd" />
                     </Link>
                 </div>
@@ -109,7 +109,8 @@ export const Header = () => {
                 width={25}
                 height={25}
                 alt="randomIMage"
+                onClick={()=>document.querySelector('.notif-wrapper').style.transform='translateX(0px)'}
               />
-        </nav>
+        </div>
     )
 }

@@ -23,9 +23,8 @@ const Messages = ({ userId }) => {
         const unsubscribe = auth.onAuthStateChanged((user)=>{            
             if(user){
                 setIsUser(true)
-            }else{
-                location.pathname = "/"
-                router.push("Login")
+            }else{                
+                router.push("/Login")
             }
           })
           return () => {

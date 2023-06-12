@@ -288,10 +288,17 @@ $mobo: 768px;
             justify-content: center;
             align-items: center;
 
+            @include media(500px){
+                gap: .3em;
+            }
+
             span {
                 font-size: 1.4rem;
                 color: #000;
                 font-weight: 600;
+                @include media(500px){
+                    gap: 1.2em;
+                }
             }
 
             span:last-child {
