@@ -123,6 +123,10 @@ $mobo: 768px;
                     font-size: 2.2rem;
                     color: #4444;
                     margin-bottom: 10px;
+
+                    @include media(500px){
+                        margin-top: 10px;
+                    }
                 }
 
                 .input-field {
