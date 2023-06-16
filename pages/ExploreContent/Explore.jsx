@@ -102,61 +102,17 @@ const Explore = () => {
     }
   }
 
-  // const downloadVid=(e)=>{
-  //   if(e.target.classList.contains('downloadvid')){
-  //     fetch(e.target.getAttribute('vidurl')).then(res=>res.blob()).then(file=>{
-  //       console.log(file)        
-  //       const a = document.createElement("a");
-  //       a.href = URL.createObjectURL(file);
-  //       a.download = new Date().getTime() + '.mp4';
-  //       a.click()
-  //     }).catch(()=>console.log('err'))
-  //   }
-  // }
-
-  const downloadVid = (e) => {
-    if (e.target.classList.contains('downloadvid')) {
-      const videoUrl = e.target.getAttribute('vidurl');
-      const fileName = new Date().getTime() + ".mp4"; // Set the desired filename with extension
-  
-      fetch(videoUrl, { method: 'HEAD' })
-        .then((res) => {
-          const fileSize = res.headers.get('content-length');
-          const chunkSize = 1024 * 1024; // Adjust the chunk size as per your requirement
-          let start = 0;
-          let end = chunkSize - 1;
-  
-          const downloadChunk = async () => {
-            while (start < fileSize) {
-              const range = `bytes=${start}-${end}`;
-              const options = {
-                method: 'GET',
-                headers: { Range: range },
-              };
-  
-              const chunk = await fetch(videoUrl, options).then((res) => res.blob());
-              saveChunk(chunk, start);
-              start += chunkSize;
-              end = Math.min(end + chunkSize, fileSize - 1);
-            }
-          };
-  
-          const saveChunk = (chunk, start) => {
-            const fileReader = new FileReader();
-            fileReader.onload = function () {
-              const a = document.createElement("a");
-              a.href = this.result;
-              a.download = start + "_" + fileName; // Add the start position as a prefix to the filename
-              a.click();
-            };
-            fileReader.readAsDataURL(chunk);
-          };
-  
-          downloadChunk();
-        })
-        .catch(() => console.log('err'));
+  const downloadVid=(e)=>{
+    if(e.target.classList.contains('downloadvid')){
+      fetch(e.target.getAttribute('vidurl')).then(res=>res.blob()).then(file=>{
+        console.log(file)        
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(file);
+        a.download = new Date().getTime() + '.mp4';
+        a.click()
+      }).catch(()=>console.log('err'))
     }
-  };
+  }
   
 
   useEffect(() => {

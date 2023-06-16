@@ -102,6 +102,10 @@ const MoboExplore = () => {
     }
   }
 
+  const moboloader=()=>{
+
+  }
+
   return (
     <>
       {
@@ -144,11 +148,26 @@ const MoboExplore = () => {
                 <div className="mobo-explore-image">
                   <img
                     src={exploreSrc}
-                    alt="" />
+                    alt="zxc"
+                    className='moboexploreimg'
+                    onLoad={()=>document.querySelector('.postmoboloading').style.display="none"}
+                     />
+
+                  <div className='postmoboloading'>
+                    <img 
+                    src="https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" 
+                    alt="" 
+                    style={{
+                      margin: '.5em auto',
+                      height: '80px',
+                      width: '80px',
+                      filter: 'hue-rotate(45deg) drop-shadow(2px -1px 6px black)'
+                    }} />
+                  </div>
                 </div>
                 :
                 <div className="mobo-explore-video">
-                  <video src={exploreSrc} loop muted autoPlay />
+                  <video src={exploreSrc} loop muted autoPlay/>                  
                 </div>
             }
             <div className="mobo-explore-content">
@@ -424,14 +443,14 @@ const MoboExplore = () => {
       }
       {explorePopUp && <PostPopup />
       }
-      <div style={{width:'100%', display:'flex', justifyContent:'center', background:'#000'}}>
+      <div style={{ width: '100%', display: 'flex', justifyContent: 'center', background: '#000' }}>
         <img src="https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="" style={{
           margin: '.5em auto',
           height: '80px',
           width: '80px',
           filter: 'hue-rotate(45deg) drop-shadow(2px -1px 6px black)'
         }} />
-        </div>
+      </div>
     </>
   )
 }

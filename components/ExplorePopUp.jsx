@@ -325,11 +325,13 @@ export const ExplorePopUp = () => {
                                 src={`/assets/like.svg`} 
                                 height={25} 
                                 width={25} />
+
                                 <Image 
                                 alt="randomImage" 
                                 src={`/assets/comments.svg`} 
                                 height={25} 
                                 width={25} />
+
                                 <Image 
                                 alt="randomImage" 
                                 src={`/assets/share.svg`} 
@@ -337,7 +339,8 @@ export const ExplorePopUp = () => {
                                 width={25} 
                                 style={{ filter: 'unset' }} />
                             </div>
-                            {bookMark ? 
+                            {
+                                bookMark ? 
                             <Image 
                             alt="randomImage" 
                             src={`/assets/fillbookmark.svg`} 
@@ -381,7 +384,8 @@ export const ExplorePopUp = () => {
                             }}    
                             />
                         </div>
-                        {commentSend && 
+                        {
+                            commentSend && 
                         <Image 
                         src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} 
                         width={40} 
