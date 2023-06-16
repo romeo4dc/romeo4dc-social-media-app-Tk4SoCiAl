@@ -18,7 +18,7 @@ export const PostsComp = () => {
     useEffect(() => {
         GetMyPostsData();
         userData();
-        setPopUpSrc(true);
+        setPopUpSrc(true);    
     }, [page])
 
     const GetMyPostsData = () => {
@@ -43,6 +43,7 @@ export const PostsComp = () => {
             setPage(prev => prev + 3)
         }
     }
+    
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll)
@@ -66,14 +67,24 @@ export const PostsComp = () => {
                                     <div className="userpost" key={val.id}>
                                         <div className="userinfo">
                                             <div>
-                                                <img src={userDetails.userimg} alt="" style={{ width: '30px', height: '30px' }} />
+                                                <img 
+                                                src={userDetails.userimg} 
+                                                alt="" 
+                                                style={{ width: '30px', height: '30px' }} />
+
                                                 <div>
                                                     <span>{userDetails.username}</span>
                                                     <span> {`Dubai, ${postTime} MINUTES AGO`}</span>
                                                 </div>
+
                                             </div>
-                                            <Image src={`/assets/more.svg`} width={12} height={12} alt="randomImage" />
+                                            <Image 
+                                            src={`/assets/more.svg`} 
+                                            width={12} 
+                                            height={12} 
+                                            alt="randomImage" />
                                         </div>
+
                                         <img 
                                         className="postloading" 
                                         src="https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="randomImage" 
@@ -89,32 +100,72 @@ export const PostsComp = () => {
 
                                         <div className="socialicons">
                                             <div>
-                                                <Image className='posticons' src={`/assets/like.svg`} width={22} height={22} alt="randomImage" />
-                                                <Image className='posticons' src={`/assets/comments.svg`} width={22} height={22} alt="randomImage" data-name={val.id} onClick={
+                                                <Image 
+                                                className='posticons' 
+                                                src={`/assets/like.svg`} 
+                                                width={22} 
+                                                height={22} 
+                                                alt="randomImage" />
+
+                                                <Image 
+                                                className='posticons' 
+                                                src={`/assets/comments.svg`} 
+                                                width={22} 
+                                                height={22} 
+                                                alt="randomImage" 
+                                                data-name={val.id} 
+                                                onClick={
                                                     (e) => {
                                                         createPostsCollection(e)
                                                         setExplorePopUp(true)
-                                                    }} image={val.file} username={userDetails.username}/>
-                                                <Image className='posticons share' src={`/assets/share.svg`} width={22} height={22} alt="randomImage" style={{ filter: 'invert(1)' }} />
+                                                    }} 
+                                                    image={val.file} 
+                                                    username={userDetails.username}/>
+
+                                                <Image 
+                                                className='posticons share' 
+                                                src={`/assets/share.svg`} 
+                                                width={22} 
+                                                height={22} 
+                                                alt="randomImage" 
+                                                style={{ filter: 'invert(1)' }} />
+
                                             </div>
-                                            {bookMark ? <Image alt="randomImage" src={`/assets/fillbookmark.svg`} height={27} width={27} onClick={removePostSavedItems} />
+
+                                            {
+                                                bookMark ? 
+                                            <Image 
+                                            alt="randomImage" 
+                                            src={`/assets/fillbookmark.svg`} 
+                                            height={27} 
+                                            width={27} 
+                                            onClick={removePostSavedItems} />
                                                 :
-                                                <Image alt="randomImage" src={`/assets/bookmark.svg`} height={27} width={27} onClick={postSavedItems} />}
+                                                <Image 
+                                                alt="randomImage" 
+                                                src={`/assets/bookmark.svg`} 
+                                                height={27} 
+                                                width={27} 
+                                                onClick={postSavedItems} />}
                                         </div>
+
                                         <div className="likes">
-                                            <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
+                                            <Image 
+                                            src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
+                                                width={13}
+                                                height={13}
+                                                alt="randomImage" />
+
+                                            <Image 
+                                            src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
                                                 width={13}
                                                 height={13}
                                                 alt="randomImage" />
 
                                             <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
                                                 width={13}
-                                                height={13}
+                                                height={13} 
                                                 alt="randomImage" />
-
-                                            <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
-                                                width={13}
-                                                height={13} alt="randomImage" />
 
                                             <span style={{ marginLeft: '.5em' }}>
                                                 <span>Liked by</span>
@@ -145,7 +196,10 @@ export const PostsComp = () => {
                         alignItems: 'center',
                         filter: 'hue-rotate(45deg) drop-shadow(2px -1px 6px black)'
                     }}>
-                        <img src="https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" alt="randomImage" style={{
+                        <img 
+                        src="https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp" 
+                        alt="randomImage" 
+                        style={{
                             height: "200px",
                             width: "200px"
                         }} />
@@ -155,7 +209,7 @@ export const PostsComp = () => {
             src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
             height={100} 
             width={100} 
-            alt="daasd" 
+            alt="daasd"             
             style={{
                 filter: 'hue-rotate(45deg) drop-shadow(2px -1px 6px black)', 
                 margin:'0 auto'}}/>

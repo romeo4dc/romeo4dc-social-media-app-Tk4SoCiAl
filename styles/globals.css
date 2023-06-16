@@ -351,9 +351,6 @@ a {
   color:blue;
 }
 
-.cross{
-  display: none;
-}
 @media(width < 1200px){
   .storylogo{
     display: none;

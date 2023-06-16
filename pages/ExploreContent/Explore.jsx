@@ -66,11 +66,11 @@ const Explore = () => {
 
   const { data: videoApiData, error: videoError } = useSWR(`https://api.pexels.com/videos/popular?page=${page}&per_page=10`, videoFetcher)
 
-
   useEffect(() => {
     GetExploreData(docSize)
     getCommentPostTiming()
   }, [])
+
 
   useEffect(() => {
     setLoading(true)
@@ -90,6 +90,74 @@ const Explore = () => {
       setPage(prev => prev + 1)
     }
   }
+
+  const downloadImg=(e)=>{
+    if(e.target.classList.contains('download')){
+      fetch(e.target.getAttribute('imgurl')).then(res=>res.blob()).then(file=>{
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(file);
+        a.download = new Date().getTime();
+        a.click()
+      }).catch(()=>console.log('err'))
+    }
+  }
+
+  // const downloadVid=(e)=>{
+  //   if(e.target.classList.contains('downloadvid')){
+  //     fetch(e.target.getAttribute('vidurl')).then(res=>res.blob()).then(file=>{
+  //       console.log(file)        
+  //       const a = document.createElement("a");
+  //       a.href = URL.createObjectURL(file);
+  //       a.download = new Date().getTime() + '.mp4';
+  //       a.click()
+  //     }).catch(()=>console.log('err'))
+  //   }
+  // }
+
+  const downloadVid = (e) => {
+    if (e.target.classList.contains('downloadvid')) {
+      const videoUrl = e.target.getAttribute('vidurl');
+      const fileName = new Date().getTime() + ".mp4"; // Set the desired filename with extension
+  
+      fetch(videoUrl, { method: 'HEAD' })
+        .then((res) => {
+          const fileSize = res.headers.get('content-length');
+          const chunkSize = 1024 * 1024; // Adjust the chunk size as per your requirement
+          let start = 0;
+          let end = chunkSize - 1;
+  
+          const downloadChunk = async () => {
+            while (start < fileSize) {
+              const range = `bytes=${start}-${end}`;
+              const options = {
+                method: 'GET',
+                headers: { Range: range },
+              };
+  
+              const chunk = await fetch(videoUrl, options).then((res) => res.blob());
+              saveChunk(chunk, start);
+              start += chunkSize;
+              end = Math.min(end + chunkSize, fileSize - 1);
+            }
+          };
+  
+          const saveChunk = (chunk, start) => {
+            const fileReader = new FileReader();
+            fileReader.onload = function () {
+              const a = document.createElement("a");
+              a.href = this.result;
+              a.download = start + "_" + fileName; // Add the start position as a prefix to the filename
+              a.click();
+            };
+            fileReader.readAsDataURL(chunk);
+          };
+  
+          downloadChunk();
+        })
+        .catch(() => console.log('err'));
+    }
+  };
+  
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -111,14 +179,19 @@ const Explore = () => {
                       <div className="posts-box"
                         onClick={createPostsCollection}
                         key={media.id + 2}>
-
                         <img
                           src={media.src.large2x}
                           alt="Random Image"
                           className='main-posts'
                           data-name={media.id}
                           username={media.photographer}
-                          image={media.src.tiny} />
+                          image={media.src.tiny}                           
+                          />
+                          <div className="download" imgurl={media.src.large2x} onClick={downloadImg}>
+                            <Image src={`/assets/camera.svg`} height={25} width={25} alt="dfdfd"/>
+                            <span>{media.photographer}</span>
+                             <Image src={`/assets/download.svg`} height={25} width={25}  alt="dfdf" />
+                          </div>
                       </div>
                     )}
 
@@ -142,6 +215,11 @@ const Explore = () => {
                           width={50}
                           alt="radimeksa"
                           className="reel" />
+                           <div className="downloadvid" vidurl={media.video_files[0].link} onClick={downloadVid}>
+                            <Image src={`/assets/camera.svg`} height={25} width={25} alt="dfdfd"/>
+                            <span>{media.user.name}</span>
+                             <Image src={`/assets/download.svg`} height={25} width={25}  alt="dfdf" />
+                          </div>
                       </div>
                     )}
                   </React.Fragment>

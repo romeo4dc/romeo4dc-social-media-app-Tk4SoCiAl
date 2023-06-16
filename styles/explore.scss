@@ -21,7 +21,9 @@
           border-bottom: none;
           height: 40%;
           min-width: 20%;
+          overflow: hidden;
           width: 32.8%;
+          position: relative;
           background-color: rgba(128, 128, 128, 0.806);
           animation: loading 2s alternate infinite;
           cursor: pointer;
@@ -30,6 +32,41 @@
                width: 100%;
                height: 100%;
                object-fit: cover;
+          }
+
+          .download {
+               transition: transform .3s ease-in-out;
+               display: flex;
+               align-items: center;
+               padding: 0em .5em;
+               justify-content: space-between;
+               width: 100%;
+               height: 3em;
+               position: absolute;
+               bottom: 0;
+               transform: translateY(100%);
+               img{
+                    width: 30px!important;
+                    height: 30px!important;
+                    filter: invert(1);
+                    pointer-events: none;
+               }
+               span{
+                    text-align: left;
+                    position: absolute; 
+                    color: #fff;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    left:13%;
+                    letter-spacing: .3px;
+                    pointer-events: none;
+               }
+          }
+
+          &:hover {
+               .download {
+                    transform: translateY(0);
+               }
           }
 
      }
@@ -109,7 +146,40 @@
                height: 50px;
                pointer-events: none;
           }
+          .downloadvid{
+               transition: transform .3s ease-in-out;
+               display: flex;
+               align-items: center;
+               padding: 0em .5em;
+               justify-content: space-between;
+               width: 100%;
+               height: 3em;
+               position: absolute;
+               bottom: 0;
+               transform: translateY(100%);    
 
+               img{
+                    width: 30px!important;
+                    height: 30px!important;
+                    position: static!important;
+                    transform: none;
+               }
+               span{
+                    text-align: left;
+                    position: absolute; 
+                    color: #fff;
+                    font-weight: 600;
+                    font-size: 1rem;
+                    left:13%;
+                    letter-spacing: .3px;
+                    pointer-events: none;
+               }
+          }
+          &:hover {
+               .downloadvid {
+                    transform: translateY(0);
+               }
+          }
      }
 }
 

@@ -24,11 +24,12 @@ export const SocialProvider = ({ children }) => {
 
     
     const ClickPost = (e) => {
-        setExplorePopUp(true)        
         if (e.target.tagName === 'IMG') {            
+            setExplorePopUp(true)        
             setExploreSrc(e.target.src)
             setPopUpSrc(true)
         } else if (e.target.tagName === 'VIDEO') {
+            setExplorePopUp(true)        
             setExploreSrc(e.target.src)
             setVideoImage(e.target.getAttribute('image'))
             setPopUpSrc(false)

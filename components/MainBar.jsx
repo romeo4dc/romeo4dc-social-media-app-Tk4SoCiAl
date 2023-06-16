@@ -67,9 +67,19 @@ export const MainBar = ({mid}) => {
                         myStoriesData ?
                             myStoriesData.map((val, ind) => {
                                 return (
-                                    <div className="story-wrapper" key={val.name}>
-                                        <div className='story' onClick={()=> setStoryPopup(true)} style={{ background: `url(${val.coverimg})no-repeat center/cover` }}>
-                                            <Image src={`${val.img}`} width={50} height={50} alt="randomImage" className="img-cells" data-name={val.name} />
+                                    <div className="story-wrapper" key={val.name}>                                    
+                                        <div className='story' 
+                                        onClick={()=> setStoryPopup(true)} 
+                                        style={{ background: `url(${val.coverimg})no-repeat center/cover` }}>
+
+                                            <Image 
+                                            src={`${val.img}`} 
+                                            width={50} 
+                                            height={50} 
+                                            alt="randomImage" 
+                                            className="img-cells" 
+                                            data-name={val.name} />
+
                                             <span>{val.name}</span>
                                         </div>
                                     </div>
@@ -100,7 +110,11 @@ export const MainBar = ({mid}) => {
                     setIsPostSelector(false)
                 }}>
                     <div>
-                        <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} width={30} height={30} alt="randomImage" />
+                        <Image 
+                        src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} 
+                        width={30} 
+                        height={30} 
+                        alt="randomImage" />
                         <div>What's on your mind, User?</div>
                     </div>
                     <button>Post</button>
