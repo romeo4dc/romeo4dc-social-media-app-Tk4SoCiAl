@@ -1,6 +1,6 @@
 <h1 align="center">Social-Media-App (Tk4SoCiAl)</h1>
 <h2 align="center">This is a full stack project made up of using Nextjs, Firebase and Pexels API  it includes features like :=> </h2>
-<h3>- It contians over more than 35000 photos and videos</h3>
+<h3>- It contains over more than 35000 photos and videos</h3>
 <h3>- USER AUTHENTICATION</h3>
 <h3>- INFINITE SCROLLING</h3>
 <h3>- EDIT PROFILE</h3>
