@@ -58,7 +58,8 @@ $mobo: 768px;
 
         .messages {
             margin-top: 2em;
-            height: 100%;
+            max-height: 600px;            
+            overflow-x: scroll;
 
             .messages-users {
                 display: flex;

@@ -72,7 +72,13 @@ export const StoryComp = ({ storyPostsData }) => {
 
 
 
-                                    <div className={value === ind ? "story-small-items-display" : "small-stories"} style={{ background: `url(${val.posts})no-repeat center/cover` }} >
+                                    <div className={value === ind ? 
+                                        "story-small-items-display" 
+                                        : 
+                                        "small-stories"} 
+                                        style={{ 
+                                            background: `url(${val.posts})no-repeat center/cover` 
+                                            }} >
                                         <div className="small-posts">
                                             <div className="small-user-info">
                                                 <Image src={val.img} width={52} height={52} alt="icons" style={{ borderRadius: '50%' }} />

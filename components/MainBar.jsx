@@ -12,7 +12,7 @@ import Image from 'next/image';
 import { use, useEffect, useState } from 'react';
 import { FieldPath, FieldValue, addDoc, collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
 
-export const MainBar = ({mid}) => {
+export const MainBar = ({ mid }) => {
     const [width, setWidth] = useState(0);
     const [isData, setIsData] = useState("all");
     const [storyPostsData, setStoryPostsData] = useState();
@@ -67,18 +67,18 @@ export const MainBar = ({mid}) => {
                         myStoriesData ?
                             myStoriesData.map((val, ind) => {
                                 return (
-                                    <div className="story-wrapper" key={val.name}>                                    
-                                        <div className='story' 
-                                        onClick={()=> setStoryPopup(true)} 
-                                        style={{ background: `url(${val.coverimg})no-repeat center/cover` }}>
+                                    <div className="story-wrapper" key={val.name}>
+                                        <div className='story'
+                                            onClick={() => setStoryPopup(true)}
+                                            style={{ background: `url(${val.coverimg})no-repeat center/cover` }}>
 
-                                            <Image 
-                                            src={`${val.img}`} 
-                                            width={50} 
-                                            height={50} 
-                                            alt="randomImage" 
-                                            className="img-cells" 
-                                            data-name={val.name} />
+                                            <img
+                                                src={`${val.img}`}
+                                                width={50}
+                                                height={50}
+                                                alt="randomImage"
+                                                className="img-cells"
+                                                data-name={val.name} />
 
                                             <span>{val.name}</span>
                                         </div>
@@ -88,19 +88,44 @@ export const MainBar = ({mid}) => {
                             :
                             <>
                                 <div className='loading-story'>
-                                    <Image src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} width={90} height={90} alt="randomImage" className="img-cells" />
+                                    <img
+                                        src={"https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"}
+                                        width={90}
+                                        height={90}
+                                        alt="randomImage"
+                                        className="img-cells" />
                                 </div>
                                 <div className='loading-story'>
-                                    <Image src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} width={90} height={90} alt="randomImage" className="img-cells" />
+                                    <img
+                                        src={"https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"}
+                                        width={90}
+                                        height={90}
+                                        alt="randomImage"
+                                        className="img-cells" />
                                 </div>
                                 <div className='loading-story'>
-                                    <Image src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} width={90} height={90} alt="randomImage" className="img-cells" />
+                                    <img
+                                        src={"https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"}
+                                        width={90}
+                                        height={90}
+                                        alt="randomImage"
+                                        className="img-cells" />
                                 </div>
                                 <div className='loading-story'>
-                                    <Image src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} width={90} height={90} alt="randomImage" className="img-cells" />
+                                    <img
+                                        src={"https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"}
+                                        width={90}
+                                        height={90}
+                                        alt="randomImage"
+                                        className="img-cells" />
                                 </div>
                                 <div className='loading-story'>
-                                    <Image src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} width={90} height={90} alt="randomImage" className="img-cells" />
+                                    <img
+                                        src={"https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"}
+                                        width={90}
+                                        height={90}
+                                        alt="randomImage"
+                                        className="img-cells" />
                                 </div>
                             </>
                     }
@@ -110,11 +135,11 @@ export const MainBar = ({mid}) => {
                     setIsPostSelector(false)
                 }}>
                     <div>
-                        <Image 
-                        src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} 
-                        width={30} 
-                        height={30} 
-                        alt="randomImage" />
+                        <img
+                            src={`https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
+                            width={30}
+                            height={30}
+                            alt="randomImage" />
                         <div>What's on your mind, User?</div>
                     </div>
                     <button>Post</button>
@@ -138,7 +163,7 @@ export const MainBar = ({mid}) => {
                 {isData === "reels" && <ReelsComp />}
             </motion.div>
             {storyPopup && <StoryComp storyPostsData={storyPostsData} />}
-            {explorePopUp && <PostPopup/>}
+            {explorePopUp && <PostPopup />}
         </>
     )
 }

@@ -18,7 +18,6 @@ export const UsersProvider = ({children}) => {
 
         const unsub = onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log("user signed in")
                 const { uid, displayName, photoURL } = user;
                 set(child(activeUsersRef, uid), { displayName, photoURL, id });
             } else {

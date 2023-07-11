@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React, { useLayoutEffect } from "react";
 import { useRouter } from "next/router";
+import { CldImage } from 'next-cloudinary';
 import { useFirebase } from '@/firebase/firebase';
 import { useEffect, useState } from "react";
 import { useSocial } from '@/context/Context';
@@ -99,17 +100,14 @@ const Messages = ({ userId }) => {
                             return (
 
                                 uid !== auth.currentUser.uid && auth.currentUser.displayName &&
-
                                 <div className={ind === value ? "messages-users message-active" : "messages-users"} onClick={(e) => {
                                     router.push(`/MessagesComp/${uid}`)
                                     setValue(ind)
                                     MessageUser(e)
                                     getAllUserDetails()
                                 }} key={id}>
-                                    <Image 
-                                    src={`https://res.cloudinary.com/demo/image/fetch/${photoURL}`} 
-                                    width={40} 
-                                    height={40} 
+                                    <img 
+                                    src={`${photoURL}`} 
                                     alt="ramdss" />
                                     <div>
                                         <span data-name={uid}>{displayName}</span>
@@ -136,13 +134,13 @@ const Messages = ({ userId }) => {
 
                             {photoURL ?
                                 (
-                                    <Image src={`https://res.cloudinary.com/demo/image/fetch/${photoURL}`}
+                                    <img src={`${photoURL}`}
                                         width={50}
                                         height={50}
                                         alt="dfsd"
                                     />
                                 ) : (
-                                    <Image src={`https://res.cloudinary.com/demo/image/fetch/https://cdn-icons-png.flaticon.com/512/149/149071.png`}
+                                    <img src={`https://cdn-icons-png.flaticon.com/512/149/149071.png`}
                                         width={50}
                                         height={50}
                                         alt="dfsd"
@@ -202,13 +200,13 @@ const Messages = ({ userId }) => {
                     {isMessageUser && <div className="centeruser">
                         {photoURL ?
                             (
-                                <Image src={`https://res.cloudinary.com/demo/image/fetch/${photoURL}`}
+                                <img src={`${photoURL}`}
                                     width={50}
                                     height={50}
                                     alt="dfsd"
                                 />
                             ) : (
-                                <Image src={`https://res.cloudinary.com/demo/image/fetch/https://cdn-icons-png.flaticon.com/512/149/149071.png`}
+                                <img src={`https://cdn-icons-png.flaticon.com/512/149/149071.png`}
                                     width={50}
                                     height={50}
                                     alt="dfsd"
@@ -251,8 +249,8 @@ const Messages = ({ userId }) => {
                                                     <br />
                                                     {
                                                         uid !== auth.currentUser.uid &&
-                                                        <Image 
-                                                        src={`https://res.cloudinary.com/demo/image/fetch/${photoURL}`} 
+                                                        <img 
+                                                        src={`${photoURL}`} 
                                                         width={40} 
                                                         height={40} 
                                                         alt="ramdss" />
@@ -294,7 +292,10 @@ const Messages = ({ userId }) => {
                             <input type="text" value={msg} onChange={(e) => {
                                 setMsg(e.target.value)
                                 e.target.value.length > 0 ? setIsInpValue(false) : setIsInpValue(true)
-                            }} placeholder="Message..."  onKeyUp={(e)=> e.key ==='Enter' && sendMessage(e)}/>
+                            }} 
+                            placeholder="Message..."  
+                            onKeyUp={(e)=> e.key ==='Enter' && sendMessage(e)}
+                            />
                             {isInpValue ? <div className="chat-options">
 
                                 <Image src={`/assets/gallery.svg`} height={30} width={30} alt="randomImage" />

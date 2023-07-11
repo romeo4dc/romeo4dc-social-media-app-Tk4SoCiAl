@@ -165,18 +165,18 @@ export const ExploreComp = () => {
                                         </div>
 
                                         <div className="likes">
-                                            <Image
-                                                src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
+                                            <img
+                                                src={`https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
                                                 width={13}
                                                 height={13}
                                                 alt="randomImage" />
-                                            <Image
-                                                src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
+                                            <img
+                                                src={`https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
                                                 width={13}
                                                 height={13}
                                                 alt="randomImage" />
-                                            <Image
-                                                src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
+                                            <img
+                                                src={`https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
                                                 width={13}
                                                 height={13}
                                                 alt="randomImage" />
@@ -399,8 +399,8 @@ export const ExploreComp = () => {
                     </div>
             }
 
-                    <Image 
-                    src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
+                    <img 
+                    src={`https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
                     height={100} 
                     width={100} 
                     alt="daasd" 

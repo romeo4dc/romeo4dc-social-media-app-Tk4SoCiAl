@@ -73,9 +73,9 @@ export const ExplorePopUp = () => {
                 {
                         popUpSrc ? (
                             <>
-                            <Image 
+                            <img 
                             alt="randomImage" 
-                            src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
+                            src={`https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
                             height={35} 
                             width={35} 
                             style={{
@@ -91,9 +91,9 @@ export const ExplorePopUp = () => {
                             ) : (
                             <>
 
-                            <Image 
+                            <img 
                             alt="randomImage" 
-                            src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
+                            src={`https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
                             height={35} 
                             width={35} 
                             style={{transform:'scale(.5)'}} 
@@ -134,15 +134,15 @@ export const ExplorePopUp = () => {
                 </div>
                     <div className="header exph">
                         <div className="header-left exphl">
-                            <Image 
+                            <img 
                             alt="randomImage" 
-                            src={`https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
+                            src={`https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp`} 
                             height={35} 
                             width={35} 
                             className="userloader"/>
-                         <Image 
+                         <img
                          alt="randomImage" 
-                         src={`https://res.cloudinary.com/demo/image/fetch/${postImage}`} 
+                         src={`${postImage}`} 
                          height={35} 
                          width={35} 
                          onLoad={loader} 
@@ -171,9 +171,9 @@ export const ExplorePopUp = () => {
 
                     <div className="comments expc">
                         <div className="comment-users expcu">
-                            <Image 
+                            <img 
                             alt="randomImage" 
-                            src={`https://res.cloudinary.com/demo/image/fetch/https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg`} 
+                            src={`https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg`} 
                             height={35} 
                             width={35} />
                             <div className="right-comments">
@@ -304,8 +304,8 @@ export const ExplorePopUp = () => {
                                 })
                                 :
                                 
-                                <Image 
-                                src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} 
+                                <img
+                                src={"https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} 
                                 width={40} 
                                 height={40} 
                                 alt="randomImage" 
@@ -386,8 +386,8 @@ export const ExplorePopUp = () => {
                         </div>
                         {
                             commentSend && 
-                        <Image 
-                        src={"https://res.cloudinary.com/demo/image/fetch/https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} 
+                        <img 
+                        src={"https://i.giphy.com/media/yyqOUPn5souNBSHUnU/giphy.webp"} 
                         width={40} 
                         height={40} 
                         alt="randomImage" 

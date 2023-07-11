@@ -76,7 +76,7 @@ export const Header = () => {
                     <div className="userpopup">
                         <div className="profileuser">
                             <div>
-                                <Image src={`https://res.cloudinary.com/demo/image/fetch/https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} height={60} width={60} alt="" />
+                                <img src={`https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} height={60} width={60} alt="" />
                                 <div>
                                     <span>tushar kumar</span>
                                     <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</span>
@@ -96,9 +96,9 @@ export const Header = () => {
                 <div className="usericon">
                   { auth.currentUser ? 
                   ( 
-                    <Image src={`https://res.cloudinary.com/demo/image/fetch/${auth.currentUser.photoURL}`} height={33} width={33} alt="" /> 
+                    <img src={`${auth.currentUser.photoURL}`} height={33} width={33} alt="" /> 
                   ) : (
-                  <Image src={`https://res.cloudinary.com/demo/image/fetch/https://cdn-icons-png.flaticon.com/512/149/149071.png`} height={33} width={33} alt="" /> 
+                  <img src={`https://cdn-icons-png.flaticon.com/512/149/149071.png`} height={33} width={33} alt="" /> 
                   )
                   }
                     <Image src={`/assets/arrow-down.svg`} height={20} width={20} alt="" className="dropdown" onClick={popUp} />
