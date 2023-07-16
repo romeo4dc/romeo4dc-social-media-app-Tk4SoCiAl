@@ -3,6 +3,7 @@ import useSWR from 'swr';
 import Image from "next/image";
 import { useFirebase } from '@/firebase/firebase';
 import { useEffect, useRef, useState } from 'react';
+import {Header} from "@/components/Header";
 import { ExplorePopUp } from '@/components/ExplorePopUp';
 import { useSocial } from "@/context/Context";
 import { useRouter } from 'next/router';
@@ -81,6 +82,9 @@ const Explore = () => {
     setLoading(false)
   }, [imageApiData, videoApiData, page]);
 
+  const handleChange=()=>{
+        
+  }
 
   const handleScroll = () => {
     if (window.innerHeight + document.documentElement.scrollTop + 1
@@ -113,7 +117,6 @@ const Explore = () => {
       }).catch(()=>console.log('err'))
     }
   }
-  
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -126,6 +129,7 @@ const Explore = () => {
       {
         isUser &&
         <>
+        <Header exploreData={arrExploreData}/>
           <div className="explore-container pc-explore" onClick={ClickPost}>
             {arrExploreData &&
               arrExploreData.map((media, index) => {

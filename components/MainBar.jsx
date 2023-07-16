@@ -8,7 +8,6 @@ import { PostsComp } from '@/components/PostsComp';
 import { ReelsComp } from '@/components/ReelsComp';
 import { StoryComp } from "@/components/StoryComp";
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { use, useEffect, useState } from 'react';
 import { FieldPath, FieldValue, addDoc, collection, doc, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc, updateDoc, where } from 'firebase/firestore';
 

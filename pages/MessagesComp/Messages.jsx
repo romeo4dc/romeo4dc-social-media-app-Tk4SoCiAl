@@ -80,7 +80,8 @@ const Messages = ({ userId }) => {
 
     return (
         <>
-        {isUser && <div className="inbox">
+        {isUser && 
+        <div className="inbox">
             <div className="messages-container">
                 <span style={{ paddingLeft: '.8em' }} >
                     <Image style={{ 
@@ -97,6 +98,7 @@ const Messages = ({ userId }) => {
                         activeUsersData &&
                         activeUsersData.map((users, ind) => {
                             const { photoURL, displayName, uid, id } = users;
+                            console.log(photoURL)
                             return (
 
                                 uid !== auth.currentUser.uid && auth.currentUser.displayName &&
@@ -106,9 +108,7 @@ const Messages = ({ userId }) => {
                                     MessageUser(e)
                                     getAllUserDetails()
                                 }} key={id}>
-                                    <img 
-                                    src={`${photoURL}`} 
-                                    alt="ramdss" />
+                                    <Image src={`https://res.cloudinary.com/demo/image/fetch/${photoURL}`} height={60} width={60} alt="ramdss" />
                                     <div>
                                         <span data-name={uid}>{displayName}</span>
                                         <span></span>
@@ -134,11 +134,7 @@ const Messages = ({ userId }) => {
 
                             {photoURL ?
                                 (
-                                    <img src={`${photoURL}`}
-                                        width={50}
-                                        height={50}
-                                        alt="dfsd"
-                                    />
+                                    <Image src={`https://res.cloudinary.com/demo/image/fetch/${photoURL}`} height={60} width={60} alt="ramdss" />                                    
                                 ) : (
                                     <img src={`https://cdn-icons-png.flaticon.com/512/149/149071.png`}
                                         width={50}
@@ -200,7 +196,7 @@ const Messages = ({ userId }) => {
                     {isMessageUser && <div className="centeruser">
                         {photoURL ?
                             (
-                                <img src={`${photoURL}`}
+                                <img src={photoURL}
                                     width={50}
                                     height={50}
                                     alt="dfsd"
@@ -250,7 +246,7 @@ const Messages = ({ userId }) => {
                                                     {
                                                         uid !== auth.currentUser.uid &&
                                                         <img 
-                                                        src={`${photoURL}`} 
+                                                        src={photoURL} 
                                                         width={40} 
                                                         height={40} 
                                                         alt="ramdss" />

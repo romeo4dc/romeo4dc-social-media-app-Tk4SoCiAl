@@ -1,13 +1,15 @@
 import { getAuth, signOut } from "firebase/auth"
 import Image from "next/image"
 import Link from "next/link"
+import axios from "axios";
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useFirebase } from "@/firebase/firebase"
 const auth = getAuth();
 
-export const Header = () => {
+export const Header = ({exploreData}) => {
     const [isPopUp, setIsPopUp] = useState(false)
+    const [inpVal, setInpVal] = useState("");
     
     const router = useRouter();
     const fb = useFirebase();
@@ -21,21 +23,18 @@ export const Header = () => {
     }
     const handleScroll = () => {
         let navbar = document.querySelector(".navbar");
-        let container = document.querySelector(".container");
-        
+        let container = document.querySelector(".container");        
         if(navbar){
         try{
         if (window.pageYOffset >= 70) {
             navbar.style.position = "fixed";
-            navbar.style.padding = "1.4em 5em";
-            navbar.style.background = "#fff";
+            navbar.style.padding = ".8em 5em";
             if (container) {
                 container.style.paddingTop = "7em";
             }
         } else {
             navbar.style.position = "relative";
-            navbar.style.padding = "2em 5em";
-            navbar.style.background = "transparent";
+            navbar.style.padding = "1em 5em";
             if (container) {
                 container.style.paddingTop = "1em";
             }
@@ -45,6 +44,19 @@ export const Header = () => {
     }
 }
     }
+
+    const fetchData = (value) => {
+        const results = exploreData.filter((user)=>{
+            return user && user.photographer && user.photographer.toLowerCase().includes(value)
+        });
+        console.log(results)
+      };            
+      
+    const handleChange=(value)=>{
+      setInpVal(value)
+      fetchData(value)
+    }
+
     useEffect(() => {
         window.addEventListener('click', popUp)
         window.addEventListener('scroll', handleScroll);
@@ -55,7 +67,7 @@ export const Header = () => {
             <span>Tk4SoCiAl</span>
             <div className="inputsec">
                 <Image src={`/assets/search.svg`} height={20} width={20} alt="" />
-                <input type="text" placeholder="Search for creators, inspirations, and projects" />
+                <input type="text" placeholder="Search for creators, inspirations, and projects" onChange={(e)=>handleChange(e.target.value)} />
             </div>
             <div className="login">
                 <div className="navsocialicons">
@@ -96,7 +108,7 @@ export const Header = () => {
                 <div className="usericon">
                   { auth.currentUser ? 
                   ( 
-                    <img src={`${auth.currentUser.photoURL}`} height={33} width={33} alt="" /> 
+                    <img src={auth.currentUser.photoURL} height={33} width={33} alt="" /> 
                   ) : (
                   <img src={`https://cdn-icons-png.flaticon.com/512/149/149071.png`} height={33} width={33} alt="" /> 
                   )
