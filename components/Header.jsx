@@ -49,9 +49,8 @@ export const Header = ({exploreData}) => {
         const results = exploreData.filter((user)=>{
             return user && user.photographer && user.photographer.toLowerCase().includes(value)
         });
-        console.log(results)
+        console.log(results,"names")
       };            
-      
     const handleChange=(value)=>{
       setInpVal(value)
       fetchData(value)
