@@ -10,6 +10,7 @@ const auth = getAuth();
 export const Header = ({exploreData}) => {
     const [isPopUp, setIsPopUp] = useState(false)
     const [inpVal, setInpVal] = useState("");
+    const [searchResults, setSearchResults] = useState(null);
     
     const router = useRouter();
     const fb = useFirebase();
@@ -45,11 +46,17 @@ export const Header = ({exploreData}) => {
 }
     }
 
+
     const fetchData = (value) => {
         const results = exploreData.filter((user)=>{
-            return user && user.photographer && user.photographer.toLowerCase().includes(value)
+            if(value && user && user.photographer){
+                return user.photographer.toLowerCase().includes(value)
+            }
+            else if (value && user && user.user.name){
+                return user.user.name.toLowerCase().includes(value)
+            }            
         });
-        console.log(results,"names")
+        setSearchResults(results)
       };            
     const handleChange=(value)=>{
       setInpVal(value)
@@ -62,6 +69,7 @@ export const Header = ({exploreData}) => {
     }, [])
 
     return (
+        <>
         <div className="navbar">
             <span>Tk4SoCiAl</span>
             <div className="inputsec">
@@ -122,6 +130,23 @@ export const Header = ({exploreData}) => {
                 alt="randomIMage"
                 onClick={()=>document.querySelector('.notif-wrapper').style.transform='translateX(0px)'}
               />
+        <div className="searchresults">
+              {
+              searchResults && searchResults.map((results)=>{
+                return(
+                    <>
+                    {results.hasOwnProperty('photographer') &&(
+                        <li>{results.photographer}</li>
+                    )}
+                    {results.hasOwnProperty('video_files') &&(
+                        <li>{results.user.name}</li>
+                    )}
+                    </>
+                )
+              })              
+              }
         </div>
+        </div>
+        </>
     )
 }
